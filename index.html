@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Salaire Mensuelle – Emanuel Diniz Magalhães</title>
+    <link rel="stylesheet" href="offline_assets/css/flatpickr.min.css">
+    <link rel="stylesheet" href="offline_assets/css/monthSelect.css">
+    <link rel="stylesheet" href="offline_assets/css/all.min.css">
+    <style>
+        /* --- Styles CSS Gerais --- */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; color: #333; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 30px; background: #ffffff; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
+        .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #007bff; padding-bottom: 15px; margin-bottom: 25px; }
+        .header-logos img { height: 55px; margin-left: 15px; vertical-align: middle; }
+        .header h1 { color: #0056b3; margin: 0; font-size: 1.8em; text-align: right; }
+        .header-info { display: flex; flex-direction: column; align-items: flex-end; }
+        .ficha-numero { font-size: 0.9em; color: #6c757d; margin-bottom: 5px; }
+        .periodo-pagamento { font-size: 0.85em; color: #495057; margin-bottom: 5px; }
+        #mois-annee-titre { display: none; font-size: 0.8em; color: #495057; margin-left: 10px; }
+        h2, h3 { color: #0056b3; border-bottom: 1px solid #e9ecef; padding-bottom: 8px; margin-top: 30px; margin-bottom: 20px; font-weight: 600; display: flex; align-items: center; }
+        h2 i, h3 i { margin-right: 8px; color: #007bff; width: 20px; text-align: center; }
+        #resultats td i { margin-right: 6px; width: 16px; text-align: center; color: #0056b3; }
+        .deductions-header td i { color: #dc3545; }
+        .benefits-header td i { color: #28a745; }
+        h3 { font-size: 1.3em; }
+        .section { margin-bottom: 25px; padding: 20px; background-color: #fdfdff; border: 1px solid #eef2f7; border-radius: 5px; }
+        .field { margin-bottom: 15px; }
+        .employee-info-grid { display: flex; flex-direction: column; gap: 15px; }
+        .form-row { display: flex; flex-wrap: wrap; gap: 20px; }
+        .form-col { flex: 1; min-width: 250px; }
+        .form-col-small { flex: 0.5; min-width: 150px; }
+        .form-col label { display: flex; align-items: center; margin-bottom: 5px; font-weight: 500; color: #495057; }
+        .form-col label i.fa-fw { margin-right: 6px; text-align: center; color: #007bff; }
+        .period-selector-col { display: flex; flex-direction: column; }
+        .period-selector-inputs { display: flex; align-items: flex-end; gap: 10px; }
+        .period-selector-inputs > div:first-child { flex-grow: 1; }
+        input[type="text"], input[type="number"], input[type="date"], input[type="month"], select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box; background-color: #fff; transition: border-color 0.2s ease-in-out; font-size: 0.95em; }
+        input:focus, select:focus, textarea:focus { border-color: #80bdff; outline: none; box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); }
+        .input-error { border-color: #dc3545 !important; box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25); }
+        textarea { resize: vertical; min-height: 80px; }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        .button-group { margin-top: 25px; text-align: right; }
+        button { padding: 10px 18px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px; font-size: 0.95em; transition: background-color 0.2s ease-in-out, opacity 0.2s; }
+        button i { margin-right: 5px; }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #6c757d; opacity: 0.6; cursor: not-allowed; }
+        button.secondary { background-color: #6c757d; }
+        button.secondary:hover:not(:disabled) { background-color: #5a6268; }
+        .btn-select-dates { padding: 4px 8px; font-size: 0.8em; margin-left: 5px; vertical-align: middle; }
+        .btn-select-dates i { margin-right: 3px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background-color: #fff; table-layout: auto; }
+        th, td { border: 1px solid #dee2e6; padding: 8px 10px; text-align: left; vertical-align: middle; font-size: 0.9em; word-break: break-word; }
+        th { background-color: #e9ecef; font-weight: 600; color: #495057; }
+        td { color: #212529; }
+        th.center, td.center { text-align: center; }
+        th.right, td.right { text-align: right; }
+        #tableTravaux input, #tableTravaux select { padding: 6px 8px; font-size: 0.9em; }
+        .display-dates { font-size: 0.85em; color: #333; background-color: #f8f9fa; padding: 4px 6px; border-radius: 3px; border: 1px solid #e9ecef; display: inline-block; margin-top: 5px; min-width: 50px; text-align: left; word-break: break-word; }
+        .heures-calculadas { background-color: #f0f0f0; border: none; text-align: right; font-weight: 500; }
+        #alert-area { margin-top: 15px; margin-bottom: 15px; }
+        #alert-area .alert { padding: 10px 15px; margin-bottom: 10px; border: 1px solid transparent; border-radius: 4px; font-size: 0.9em; }
+        #alert-area .alert-warning { color: #856404; background-color: #fff3cd; border-color: #ffeeba; }
+        #alert-area .alert-danger { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; font-weight: bold; }
+        #alert-area .alert-info { color: #0c5460; background-color: #d1ecf1; border-color: #bee5eb; }
+        #alert-area ul { margin: 0; padding-left: 5px; list-style: none; }
+        #alert-area li { margin-bottom: 5px; }
+        #resultats { margin-top: 30px; padding: 20px; background-color: #e9f0f8; border: 1px solid #c6d4e6; border-radius: 5px; }
+        #resultats table { margin-top: 10px; }
+        #resultats th { background-color: #d1dff0; }
+        .total-label { font-weight: bold; color: #0056b3; display: flex; align-items: center; }
+        .total-value { font-weight: bold; text-align: right; }
+        .net-salary { background-color: #d4edda; font-size: 1.1em; }
+        .deduction-percentage { font-size: 0.9em; color: #6c757d; padding-left: 5px; }
+        .flatpickr-calendar { box-shadow: 0 3px 15px rgba(0,0,0,0.15); border-radius: 5px; }
+        
+        /* --- Estilos para seção de benefícios --- */
+        .benefits-config { background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%); border: 2px solid #28a745; border-radius: 10px; padding: 25px; margin: 25px 0; }
+        .benefits-config h2 { color: #28a745; border-bottom: 2px solid #28a745; margin-top: 0; }
+        .benefits-toggle { display: flex; align-items: center; gap: 15px; margin: 15px 0; padding: 15px; background: white; border-radius: 8px; border: 1px solid #28a745; }
+        .benefits-toggle input[type="checkbox"] { transform: scale(1.3); margin-right: 10px; }
+        .benefits-toggle label { font-weight: 600; color: #155724; margin: 0; cursor: pointer; }
+        .benefits-info { background: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; padding: 15px; margin: 15px 0; font-size: 0.95em; }
+        .benefits-info p { margin: 5px 0; }
+        .scenario-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0; }
+        .scenario { padding: 15px; border-radius: 8px; }
+        .scenario.current { background: #d1ecf1; border: 1px solid #bee5eb; }
+        .scenario.adjusted { background: #fff3cd; border: 1px solid #ffeeba; }
+        .scenario h5 { margin-top: 0; color: #495057; font-weight: bold; }
+        .success { color: #28a745; font-weight: bold; }
+        .warning { color: #856404; font-weight: bold; }
+        .alert { padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .alert-info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+        
+        /* --- Estilos de Impressão --- */
+        @media print {
+            body { background-color: #fff; font-size: 12pt; padding: 0; margin: 0; line-height: 1.4; font-family: Arial, Helvetica, sans-serif; }
+            @page { margin: 0.4cm; size: A4; }
+            .container { width: 100%; border: none; box-shadow: none; padding: 0; margin: 0 auto; }
+            .header { padding-bottom: 4px; margin-bottom: 6px; border-bottom: 2px solid #000; display: flex; justify-content: space-between; align-items: center; }
+            .header-logos img { height: 35px; margin-left: 4px; }
+            .header h1 { font-size: 1.4em; color: #000; margin: 0; font-weight: bold; }
+            .ficha-numero, .periodo-pagamento { font-size: 10pt !important; color: #000 !important; margin-bottom: 1px; }
+            #mois-annee-titre { display: inline !important; font-weight: bold !important; text-transform: capitalize !important; font-size: 1.2em !important; color: #000 !important; margin-left: 4px !important; }
+            h2, h3 { color: #000; border-bottom: 1px solid #ddd; font-size: 1.2em; margin-top: 4px; margin-bottom: 3px; display: flex; align-items: center; font-weight: bold; }
+            .section { border: none; padding: 2px; margin-bottom: 3px; background-color: #f8f9fa; border-radius: 2px; }
+            .employer-info { background-color: #f8f9fa; padding: 2px; border-radius: 2px; }
+            .employee-info-grid { gap: 1px; }
+            .form-row { gap: 3px; margin-bottom: 1px; }
+            .form-col, .form-col-small { min-width: 0; padding: 0 1px; }
+            input, textarea, select { border: none !important; background: transparent !important; padding: 1px !important; width: 100% !important; box-shadow: none !important; font-size: 10pt !important; -webkit-appearance: none; -moz-appearance: none; appearance: none; color: #000 !important; line-height: 1.3; font-weight: 600; }
+            textarea { min-height: auto; height: auto; overflow: hidden; }
+            select { padding-right: 0 !important; }
+            select::-ms-expand { display: none; }
+            table { table-layout: fixed !important; width: 100%; margin-top: 2px; margin-bottom: 2px; border-collapse: collapse; }
+            #activites-input-section { display: none !important; }
+            #alert-area { display: none !important; }
+            .benefits-config { display: none !important; }
+            .lpp-comment { display: none !important; }
+            .heures-calculadas { background-color: transparent !important; border: none !important; text-align: right !important; color: #000 !important; font-weight: 600 !important;}
+            .display-dates { border: none !important; background-color: transparent !important; padding: 0 !important; font-size: 9pt !important; color: #000 !important; display: inline !important; word-break: break-all; font-weight: 600; }
+            .form-col label i, button i, #openCalendarBtnGlobal, .btn-select-dates, .button-group { display: none !important; }
+            h2 i, h3 i, #resultats td i { color: #000 !important; display: inline-block !important; vertical-align: middle; margin-right: 3px; width: 12px; text-align: center; font-size: 10pt; }
+            #resultats { border: none; padding: 3px 2px; background-color: #f8f9fa; margin-top: 4px; border-radius: 2px; }
+            #resultats h3 { margin-top: 0; margin-bottom: 2px; }
+            th, td { padding: 2px 3px; border: 1px solid #ddd; color: #000; font-size: 10pt; vertical-align: top; word-wrap: break-word; line-height: 1.3; font-weight: 500; }
+            th { background-color: #f0f0f0; font-weight: bold; font-size: 10pt; }
+            .total-label { display: flex; align-items: center; color: #000; font-size: 10pt; font-weight: 600; }
+            .total-value { color: #000; font-size: 10pt; font-weight: 600; }
+            .net-salary { background-color: #d4edda !important; border: 1px solid #c3e6cb !important; }
+            .net-salary .total-label, .net-salary .total-value { font-size: 11pt; font-weight: bold; }
+            .deduction-percentage { display: inline; font-size: 8pt; color: #666; font-weight: normal; }
+            .employer-info p i { margin-right: 3px; width: 12px; text-align: center; font-size: 9pt; }
+            
+            /* Redimensionamento específico da primeira tabela (Détail des Prestations) na impressão */
+            #resultats table:first-of-type th:nth-child(1) { width: 100px !important; } /* Activité - menor */
+            #resultats table:first-of-type th:nth-child(2) { width: 300px !important; } /* Jours Travaillés - muito maior */
+            #resultats table:first-of-type th:nth-child(3) { width: 35px !important; } /* Cat. - muito menor */
+            #resultats table:first-of-type th:nth-child(4) { width: 55px !important; } /* Début - menor */
+            #resultats table:first-of-type th:nth-child(5) { width: 55px !important; } /* Fin - menor */
+            #resultats table:first-of-type th:nth-child(6) { width: 75px !important; } /* Heures - menor */
+            #resultats table:first-of-type th:nth-child(7) { width: 55px !important; } /* Tarif/h - menor */
+            #resultats table:first-of-type th:nth-child(8) { width: 75px !important; } /* Total Ligne - menor */
+            
+            #resultats table:first-of-type td:nth-child(1) { width: 100px !important; } /* Activité - menor */
+            #resultats table:first-of-type td:nth-child(2) { width: 300px !important; } /* Jours Travaillés - muito maior */
+            #resultats table:first-of-type td:nth-child(3) { width: 35px !important; text-align: center !important; } /* Cat. - muito menor */
+            #resultats table:first-of-type td:nth-child(4) { width: 55px !important; } /* Début - menor */
+            #resultats table:first-of-type td:nth-child(5) { width: 55px !important; } /* Fin - menor */
+            #resultats table:first-of-type td:nth-child(6) { width: 75px !important; } /* Heures - menor */
+            #resultats table:first-of-type td:nth-child(7) { width: 55px !important; } /* Tarif/h - menor */
+            #resultats table:first-of-type td:nth-child(8) { width: 75px !important; } /* Total Ligne - menor */
+            
+            /* Layout específico da segunda tabela (Résumé du Salaire du Mois) na impressão */
+            #resultats table:last-of-type { table-layout: auto !important; width: 100% !important; }
+            #resultats table:last-of-type td:first-child { width: auto !important; text-align: left !important; }
+            #resultats table:last-of-type td:last-child { width: auto !important; text-align: right !important; }
+            
+            /* Redimensionamento específico do campo de endereço na impressão */
+            #adresseEmploye { height: 20px !important; min-height: 20px !important; max-height: 20px !important; overflow: hidden !important; }
+            
+            @page { margin: 0.3cm; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-title">
+            <h1>Fiche de Salaire Mensuelle<span id="mois-annee-titre"></span></h1>
+        </div>
+        <div class="header-info">
+            <div class="ficha-numero">Fiche N°: <span id="numeroFicha">2025-001</span></div>
+            <div class="periodo-pagamento">Période: <span id="periodoPagamento">-</span></div>
+            <div class="header-logos">
+                <img src="offline_assets/img/100px-Flag_of_Switzerland.svg.png" alt="Drapeau Suisse">
+                <img src="offline_assets/img/1024px-Flag_of_Canton_of_Bern.svg.png" alt="Bandeira do Cantão de Berna">
+            </div>
+        </div>
+    </div>
+        <div class="section">
+        <h2><i class="fas fa-building fa-fw"></i> Informations Employeur</h2>
+        <div class="employer-info">
+            <p><i class="fas fa-user fa-fw"></i> <strong>Nom:</strong> Emanuel Diniz Magalhães</p>
+            <p><i class="fas fa-map-marker-alt fa-fw"></i> <strong>Adresse:</strong> Rue de la gare 24, 2605 Sonceboz</p>
+            <p><i class="fas fa-info-circle fa-fw"></i> <strong>Ressources :</strong> l'Allocation pour Impotant Assurance-invalidité (AI), Contribution d'assistance | Assurance-invalidité (AI), LPHand Canton de Berne, Les prestations complémentaires (PC) | Les frais de maladie et d'invalidité</p>
+        </div>
+    </div>
+
+    <!-- Nova seção de configuração de benefícios -->
+    <div class="section benefits-config">
+        <h2><i class="fas fa-calculator fa-fw"></i> Configuration des Avantages Sociaux</h2>
+        
+        <div class="benefits-info">
+            <p><i class="fas fa-info-circle"></i> <strong>Tarifas LPHand:</strong> Cat. A: CHF 65,15/h | Cat. B: CHF 52,95/h | Cat. C: CHF 35,30/h</p>
+            <p><i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Pour inclure les avantages sociaux dans le budget LPHand, le salaire horaire doit être ajusté.</p>
+        </div>
+
+        <div class="benefits-toggle">
+            <input type="checkbox" id="includeVacances" checked>
+            <label for="includeVacances">
+                <i class="fas fa-umbrella-beach"></i> Inclure Indemnité de vacances (8,33%)
+            </label>
+            <span style="color: #dc3545; font-weight: bold;">OBLIGATOIRE selon l'art. 329a CO</span>
+        </div>
+
+        <div class="benefits-toggle">
+            <input type="checkbox" id="include13eme">
+            <label for="include13eme">
+                <i class="fas fa-gift"></i> Inclure 13ème salaire (8,33%)
+            </label>
+            <span style="color: #6c757d;">Facultatif - uniquement si prévu au contrat</span>
+        </div>
+
+        <div id="benefitsCalculator" style="display: block;">
+            <h4><i class="fas fa-chart-line"></i> Tarifas Ajustadas Recommandées</h4>
+            <div class="scenario-comparison">
+                <div class="scenario current">
+                    <h5>Avec Férias Seulement (Recommandé)</h5>
+                    <p><strong>Cat. A:</strong> CHF 60,14/h (au lieu de CHF 65,15)</p>
+                    <p><strong>Cat. B:</strong> CHF 48,88/h (au lieu de CHF 52,95)</p>
+                    <p><strong>Cat. C:</strong> CHF 32,59/h (au lieu de CHF 35,30)</p>
+                    <p class="success"><i class="fas fa-check-circle"></i> Reste dans le budget LPHand</p>
+                </div>
+                
+                <div class="scenario adjusted">
+                    <h5>Avec Férias + 13ème Salaire</h5>
+                    <p><strong>Cat. A:</strong> CHF 55,85/h</p>
+                    <p><strong>Cat. B:</strong> CHF 45,39/h</p>
+                    <p><strong>Cat. C:</strong> CHF 30,26/h</p>
+                    <p class="warning"><i class="fas fa-exclamation-triangle"></i> Salaire base réduit</p>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong><i class="fas fa-lightbulb"></i> Recommandation:</strong> Utilisez les tarifas ajustadas pour inclure automatiquement les bénéfices sélectionnés dans le budget LPHand disponible.
+            </div>
+        </div>
+    </div>
+
+        <h2><i class="fas fa-user-friends fa-fw"></i> Informations Employé(e)</h2>
+        <div class="employee-info-grid">
+            <div class="form-row">
+                <div class="form-col">
+                    <label for="employe"><i class="fas fa-user-check fa-fw"></i> Sélectionner Employé(e):</label>
+                    <select id="employe" onchange="remplirEmploye()">
+                        <option value="">-- Choisir un(e) employé(e) --</option>
+                        <option value="Laryssa Cultrona|Rue de l'Hôpital 15, 2800 Delémont|756.6907.9670.66|2001-08-09|Célibataire|0|Jura|Delémont|Suisse|Citoyenne">Laryssa Cultrona</option>
+                                     <option value="Flávia Giglio Spampinato|Rue Pierre-Péquignat 17, 2854 Bassecourt|756.7147.6716.38|1977-09-09|Divorcée|2|Jura|mixte de Haute-Sorne|Italienne|Permis C">Flávia Giglio Spampinato</option>
+                    </select>
+                </div>
+                <div class="form-col">
+                    <label for="adresseEmploye"><i class="fas fa-home fa-fw"></i> Adresse Employé(e):</label>
+                    <textarea id="adresseEmploye" rows="3" readonly></textarea>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-col-small">
+                    <label for="numeroAVS"><i class="fas fa-hashtag fa-fw"></i> Numéro AVS:</label>
+                    <input type="text" id="numeroAVS" readonly>
+                </div>
+                <div class="form-col-small">
+                    <label for="dateNaissance"><i class="fas fa-birthday-cake fa-fw"></i> Date de Naissance:</label>
+                    <input type="date" id="dateNaissance" readonly>
+                </div>
+                <div class="form-col-small">
+                    <label for="etatCivil"><i class="fas fa-heart fa-fw"></i> État Civil:</label>
+                    <input type="text" id="etatCivil" readonly>
+                </div>
+                <div class="form-col-small">
+                    <label for="nombreEnfants"><i class="fas fa-child fa-fw"></i> Enfants:</label>
+                    <input type="number" id="nombreEnfants" readonly>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-col-small">
+                    <label for="canton"><i class="fas fa-map fa-fw"></i> Canton:</label>
+                    <input type="text" id="canton" readonly>
+                </div>
+                <div class="form-col-small">
+                    <label for="commune"><i class="fas fa-map-pin fa-fw"></i> Commune:</label>
+                    <input type="text" id="commune" readonly>
+                </div>
+                <div class="form-col-small">
+                    <label for="nationalite"><i class="fas fa-flag fa-fw"></i> Nationalité:</label>
+                    <input type="text" id="nationalite" readonly>
+                </div>
+                <div class="form-col period-selector-col">
+                    <label for="periode"><i class="fas fa-calendar-alt fa-fw"></i> Mois / Année de référence:</label>
+                    <div class="period-selector-inputs">
+                        <div><input type="text" id="periode" placeholder="Sélectionner le mois..."></div>
+                        <div>
+                            <button type="button" id="openCalendarBtnGlobal" class="secondary" disabled title="Choisir les jours pour les lignes ci-dessous">
+                                <i class="fas fa-calendar-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2><i class="fas fa-clock fa-fw"></i> Heures Extras et Bonus</h2>
+        <div class="form-row">
+            <div class="form-col-small">
+                <label for="heuresExtras"><i class="fas fa-clock fa-fw"></i> Heures Extras:</label>
+                <input type="number" id="heuresExtras" step="0.01" placeholder="0.00">
+            </div>
+            <div class="form-col-small">
+                <label for="tauxHeuresExtras"><i class="fas fa-percentage fa-fw"></i> Taux Majoré (%):</label>
+                <input type="number" id="tauxHeuresExtras" step="0.1" placeholder="125" value="125">
+            </div>
+            <div class="form-col">
+                <label for="bonus"><i class="fas fa-award fa-fw"></i> Bonus/Primes (CHF):</label>
+                <input type="number" id="bonus" step="0.01" placeholder="0.00">
+            </div>
+        </div>
+    </div>
+    
+    <div id="alert-area"></div>
+    
+    <div class="section" id="activites-input-section">
+        <h2><i class="fas fa-tasks fa-fw"></i> Détails des Activités Réalisées</h2>
+        <p style="font-size: 0.9em; color: #6c757d;"><i>Selecione a atividade – a categoria será sugerida...</i></p>
+        <table id="tableTravaux">
+            <thead>
+                <tr>
+                    <th>Activité</th>
+                    <th class="center" style="width: 150px;">Jours Travaillés</th>
+                    <th class="center" style="width: 140px;">Catégorie</th>
+                    <th class="center" style="width: 90px;">Début</th>
+                    <th class="center" style="width: 90px;">Fin</th>
+                    <th class="right" style="width: 90px;">Heures (Total)</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="button-group" style="text-align: left; margin-top: 15px;">
+            <button type="button" class="secondary" onclick="ajouterLigne()">
+                <i class="fas fa-plus"></i> Ajouter une ligne
+            </button>
+        </div>
+    </div>
+    
+    <div class="button-group">
+        <button type="button" onclick="calculerSalaire()">
+            <i class="fas fa-calculator"></i> Calculer le Salaire
+        </button>
+        <button type="button" onclick="imprimerPourEmployeur()">
+            <i class="fas fa-print"></i> Imprimer (Employeur)
+        </button>
+        <button type="button" onclick="imprimerPourEmploye()">
+            <i class="fas fa-file-pdf"></i> Imprimer (Employé)
+        </button>
+    </div>
+    
+    <div id="resultats" class="section">
+        <h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3>
+        <p>Veuillez sélectionner le mois...</p>
+    </div>
+</div>
+
+<script src="offline_assets/js/flatpickr.min.js"></script>
+<script src="offline_assets/js/fr.js"></script>
+<script src="offline_assets/js/monthSelect.js"></script>
+<script>
+    // --- JavaScript com Inicialização e Variáveis Globais ---
+    let sharedFlatpickrInstance = null;
+    const periodeInput = document.getElementById('periode');
+    let tableBody = null;
+    const titreMoisSpan = document.getElementById('mois-annee-titre');
+    const alertArea = document.getElementById('alert-area');
+    const employeeSelect = document.getElementById('employe');
+    const timeFormatRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+    const fourDigitsRegex = /^\d{4}$/;
+    
+    const moisEnFrancais = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+
+    // Valores atualizados das tarifas por categoria
+    const tarifs = {'A': 65.15, 'B': 52.95, 'C': 35.30};
+    const activityCategoryMap = { 
+        "Actes ordinaires de la vie": "B", 
+        "Tenue du ménage": "B", 
+        "Participation à la vie sociale et loisirs": "A", 
+        "Soins particulièrement astreignants": "B", 
+        "Domaine de la vie": "C", 
+        "Domaine Surveillance pendant la journe": "B", 
+        "Domaine Surveillance pendant la journe/Nuit": "C", 
+        "Logement": "B", 
+        "Travail et formation": "A", 
+        "Relations sociales": "A", 
+        "Loisirs": "A", 
+        "Santé et bien-être": "B", 
+        "Exercices dextérité/mémoire": "A" 
+    };
+    
+    // Limites corrigidos
+    const LIMITE_HEBDO_INDIV = 50;
+    const LIMITE_HEBDO_AVERTISSEMENT = 45;
+    const LIMITE_MENSUEL_GLOBAL = 250;
+    
+    const LIMITES_HEBDO_CATEGORIE = { 
+        'A': 7,
+        'B': 29,
+        'C': 76
+    };
+    
+    const LIMITES_MENSUELLES_CATEGORIE = { 
+        'A': 32,
+        'B': 102,
+        'C': 218
+    };
+
+    // Inicialização da data de emissão
+    document.addEventListener('DOMContentLoaded', () => {
+        const hoje = new Date();
+        const dataFormatada = hoje.toLocaleDateString('fr-CH');
+        document.getElementById('dateEmission').textContent = dataFormatada;
+        
+        // Gerar número da ficha automaticamente
+        const ano = hoje.getFullYear();
+        const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+        const dia = String(hoje.getDate()).padStart(2, '0');
+        const numeroFicha = `${ano}-${mes}${dia}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+        document.getElementById('numeroFicha').textContent = numeroFicha;
+        
+        // Inicializar funcionalidade de benefícios
+        initializeBenefitsCalculator();
+    });
+
+    // Função para calcular tarifas ajustadas
+    function calculateAdjustedRates(includeVacances, include13eme) {
+        const rates = {
+            'A': 65.15,
+            'B': 52.95,
+            'C': 35.30
+        };
+        
+        let benefitsPercent = 0;
+        if (includeVacances) benefitsPercent += 0.0833; // 8.33%
+        if (include13eme) benefitsPercent += 0.0833; // 8.33%
+        
+        const adjustedRates = {};
+        for (const [category, rate] of Object.entries(rates)) {
+            adjustedRates[category] = rate / (1 + benefitsPercent);
+        }
+        
+        return {
+            original: rates,
+            adjusted: adjustedRates,
+            benefitsPercent: benefitsPercent * 100
+        };
+    }
+
+    // Função para atualizar a calculadora de benefícios
+    function updateBenefitsCalculator() {
+        const includeVacances = document.getElementById('includeVacances').checked;
+        const include13eme = document.getElementById('include13eme').checked;
+        const calculator = document.getElementById('benefitsCalculator');
+        
+        const rates = calculateAdjustedRates(includeVacances, include13eme);
+        
+        let scenarioHtml = '';
+        
+        if (includeVacances && !include13eme) {
+            scenarioHtml = `
+                <div class="scenario current">
+                    <h5>Avec Férias Seulement (Recommandé)</h5>
+                    <p><strong>Cat. A:</strong> CHF ${rates.adjusted.A.toFixed(2)}/h (au lieu de CHF ${rates.original.A})</p>
+                    <p><strong>Cat. B:</strong> CHF ${rates.adjusted.B.toFixed(2)}/h (au lieu de CHF ${rates.original.B})</p>
+                    <p><strong>Cat. C:</strong> CHF ${rates.adjusted.C.toFixed(2)}/h (au lieu de CHF ${rates.original.C})</p>
+                    <p class="success"><i class="fas fa-check-circle"></i> Reste dans le budget LPHand</p>
+                </div>
+            `;
+        } else if (includeVacances && include13eme) {
+            scenarioHtml = `
+                <div class="scenario adjusted">
+                    <h5>Avec Férias + 13ème Salaire</h5>
+                    <p><strong>Cat. A:</strong> CHF ${rates.adjusted.A.toFixed(2)}/h</p>
+                    <p><strong>Cat. B:</strong> CHF ${rates.adjusted.B.toFixed(2)}/h</p>
+                    <p><strong>Cat. C:</strong> CHF ${rates.adjusted.C.toFixed(2)}/h</p>
+                    <p class="warning"><i class="fas fa-exclamation-triangle"></i> Salaire base réduit (${rates.benefitsPercent.toFixed(2)}% de bénéfices)</p>
+                </div>
+            `;
+        } else if (!includeVacances && include13eme) {
+            scenarioHtml = `
+                <div class="scenario adjusted">
+                    <h5>Avec 13ème Salaire Seulement</h5>
+                    <p><strong>Cat. A:</strong> CHF ${rates.adjusted.A.toFixed(2)}/h</p>
+                    <p><strong>Cat. B:</strong> CHF ${rates.adjusted.B.toFixed(2)}/h</p>
+                    <p><strong>Cat. C:</strong> CHF ${rates.adjusted.C.toFixed(2)}/h</p>
+                    <p style="color: #dc3545;"><i class="fas fa-exclamation-triangle"></i> ATTENTION: Férias sont obligatoires par loi!</p>
+                </div>
+            `;
+        } else {
+            scenarioHtml = `
+                <div class="scenario current">
+                    <h5>Tarifas LPHand Standard</h5>
+                    <p><strong>Cat. A:</strong> CHF ${rates.original.A}/h</p>
+                    <p><strong>Cat. B:</strong> CHF ${rates.original.B}/h</p>
+                    <p><strong>Cat. C:</strong> CHF ${rates.original.C}/h</p>
+                    <p style="color: #dc3545;"><i class="fas fa-exclamation-triangle"></i> ATTENTION: Férias sont obligatoires par loi!</p>
+                </div>
+            `;
+        }
+        
+        calculator.innerHTML = `
+            <h4><i class="fas fa-chart-line"></i> Tarifas Ajustadas Recommandées</h4>
+            <div class="scenario-comparison">
+                ${scenarioHtml}
+            </div>
+            
+            <div class="alert alert-info">
+                <strong><i class="fas fa-lightbulb"></i> Recommandation:</strong> 
+                ${includeVacances ? 
+                    'Utilisez les tarifas ajustadas pour inclure automatiquement les bénéfices sélectionnés dans le budget LPHand disponible.' :
+                    'Les férias sont obligatoires selon l\'art. 329a CO. Cochez la case pour calculer la tarifa ajustada.'
+                }
+            </div>
+        `;
+    }
+
+    // Função para inicializar a calculadora de benefícios
+    function initializeBenefitsCalculator() {
+        const vacancesCheckbox = document.getElementById('includeVacances');
+        const treizeCheckbox = document.getElementById('include13eme');
+        
+        if (vacancesCheckbox && treizeCheckbox) {
+            vacancesCheckbox.addEventListener('change', updateBenefitsCalculator);
+            treizeCheckbox.addEventListener('change', updateBenefitsCalculator);
+            
+            // Atualizar na inicialização
+            updateBenefitsCalculator();
+        }
+    }
+
+    // Event Listeners
+    periodeInput.addEventListener('change', () => {
+        const periodeValue = periodeInput.value;
+        const disabled = !periodeValue;
+        document.querySelectorAll('.btn-select-dates').forEach(btn => btn.disabled = disabled);
+        const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
+        if(openCalendarBtnGlobal) openCalendarBtnGlobal.disabled = disabled;
+        
+        if (periodeValue) {
+            try {
+                const [year, month] = periodeValue.split('-');
+                const datePourTitre = new Date(Date.UTC(year, month - 1, 1));
+                const mois = moisEnFrancais[datePourTitre.getUTCMonth()];
+                const annee = datePourTitre.getUTCFullYear();
+                titreMoisSpan.textContent = ` - ${mois} ${annee}`;
+                
+                // Atualizar período de pagamento
+                const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+                const periodoPagamento = `01/${month}/${year} - ${String(lastDay).padStart(2, '0')}/${month}/${year}`;
+                document.getElementById('periodoPagamento').textContent = periodoPagamento;
+            } catch(e) {
+                titreMoisSpan.textContent = '';
+                document.getElementById('periodoPagamento').textContent = '-';
+                console.error("Erreur formatage date titre:", e);
+            }
+        } else {
+            titreMoisSpan.textContent = '';
+            document.getElementById('periodoPagamento').textContent = '-';
+        }
+        tableBody.innerHTML = '';
+        document.getElementById('resultats').innerHTML = `<h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3><p>Mois/Année modifié...</p>`;
+        ajouterLigne();
+        checkAllLimits();
+    });
+
+    const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
+    if (openCalendarBtnGlobal) {
+        openCalendarBtnGlobal.addEventListener('click', () => {
+            alert("Utilisez 'Choisir Jours' sur chaque ligne.");
+        });
+    }
+
+    // Funções Utilitárias
+    function getWeekNumber(d) {
+        const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+        date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+        var yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+        var weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+        return { week: weekNo, year: date.getUTCFullYear() };
+    }
+
+    function calculateHoursSingleSession(startTime, endTime) {
+        if (!timeFormatRegex.test(startTime) || !timeFormatRegex.test(endTime)) return 0;
+        try {
+            const start = startTime.split(':');
+            const end = endTime.split(':');
+            const startMinutes = parseInt(start[0], 10) * 60 + parseInt(start[1], 10);
+            const endMinutes = parseInt(end[0], 10) * 60 + parseInt(end[1], 10);
+            let diffMinutes = endMinutes - startMinutes;
+            if (diffMinutes < 0) diffMinutes += 24 * 60;
+            return diffMinutes / 60;
+        } catch (e) {
+            console.error("Erreur calcul heures:", e);
+            return 0;
+        }
+    }
+
+    function validateTimeInput(input) {
+        if (!input) return false;
+        const isValid = timeFormatRegex.test(input.value);
+        input.classList.toggle('input-error', input.value !== "" && !isValid);
+        return isValid || input.value === "";
+    }
+
+    function openRowCalendar(buttonElement) {
+        const periodeValue = periodeInput.value;
+        if (!periodeValue) {
+            alert("Veuillez d'abord sélectionner le 'Mois / Année de référence'.");
+            return;
+        }
+        const row = buttonElement.closest('tr');
+        const displayDatesSpan = row.querySelector('.display-dates');
+        const hiddenDatesListInput = row.querySelector('.selected-dates-list');
+        
+        const currentDates = hiddenDatesListInput.value ? hiddenDatesListInput.value.split(',') : [];
+        
+        if (sharedFlatpickrInstance) {
+            sharedFlatpickrInstance.destroy();
+        }
+        
+        const year = parseInt(periodeValue.split('-')[0], 10);
+        const month = parseInt(periodeValue.split('-')[1], 10);
+        const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+        
+        sharedFlatpickrInstance = flatpickr(buttonElement, {
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+            locale: "fr",
+            defaultDate: currentDates,
+            minDate: `${periodeValue}-01`,
+            maxDate: `${periodeValue}-${String(lastDay).padStart(2, '0')}`,
+            monthSelectorType: 'static',
+            clickOpens: false,
+            onClose: function(selectedDates, dateStr, instance) {
+                selectedDates.sort((a, b) => a - b);
+                const displayDays = selectedDates.map(date => date.getDate()).join(', ') || "Aucun jour";
+                const storedDates = selectedDates.map(date => instance.formatDate(date, "Y-m-d")).join(',');
+                
+                displayDatesSpan.textContent = displayDays;
+                hiddenDatesListInput.value = storedDates;
+                
+                updateRowHours(row);
+                checkAllLimits();
+            }
+        });
+        sharedFlatpickrInstance.open();
+    }
+
+    function ajouterLigne() {
+        if (!tableBody) {
+            console.error("ERREUR: tableBody n'est pas prêt.");
+            return;
+        }
+        
+        const newRow = tableBody.insertRow();
+        const isPeriodSelected = !!periodeInput.value;
+        
+        newRow.innerHTML = `
+            <td>
+                <select class="activite-select">
+                    <option value="">-- Choisir une activité --</option>
+                    <optgroup label="Activités Communes">
+                        <option value="Actes ordinaires de la vie">Actes ordinaires de la vie</option>
+                        <option value="Tenue du ménage">Tenue du ménage</option>
+                        <option value="Participation à la vie sociale et loisirs">Participation vie sociale/loisirs</option>
+                        <option value="Soins particulièrement astreignants">Soins partic. astreignants</option>
+                        <option value="Exercices dextérité/mémoire">Exercices dextérité/mémoire (A)</option>
+                        <option value="Domaine de la vie">Domaine de la vie (Cat. C)</option>
+                    </optgroup>
+                    <optgroup label="Domaines (Décision)">
+                        <option value="Logement">Logement</option>
+                        <option value="Travail et formation">Travail et formation</option>
+                        <option value="Relations sociales">Relations sociales</option>
+                        <option value="Loisirs">Loisirs</option>
+                        <option value="Santé et bien-être">Santé et bien-être</option>
+                    </optgroup>
+                    <optgroup label="Surveillance">
+                        <option value="Domaine Surveillance pendant la journe">Surveillance Jour</option>
+                        <option value="Domaine Surveillance pendant la journe/Nuit">Surveillance Jour/Nuit</option>
+                    </optgroup>
+                </select>
+            </td>
+            <td class="center">
+                <button type="button" class="btn-select-dates secondary" onclick="openRowCalendar(this)" ${isPeriodSelected ? '' : 'disabled'}>
+                    <i class="fas fa-calendar-days fa-fw"></i> Choisir
+                </button>
+                <span class="display-dates" style="display: block;">Aucun jour</span>
+                <input type="hidden" class="selected-dates-list">
+            </td>
+            <td class="center">
+                <select class="categorie-select">
+                    <option value="A">A (CHF ${tarifs['A'].toFixed(2)})</option>
+                    <option value="B">B (CHF ${tarifs['B'].toFixed(2)})</option>
+                    <option value="C">C (CHF ${tarifs['C'].toFixed(2)})</option>
+                </select>
+            </td>
+            <td class="center">
+                <input type="text" class="start-time-input" placeholder="HH:MM">
+            </td>
+            <td class="center">
+                <input type="text" class="end-time-input" placeholder="HH:MM">
+            </td>
+            <td class="right">
+                <input type="text" class="heures-calculadas" readonly>
+            </td>
+        `;
+        
+        addRowInputListeners(newRow);
+    }
+
+    function updateRowHours(row) {
+        const startTimeInput = row.querySelector('.start-time-input');
+        const endTimeInput = row.querySelector('.end-time-input');
+        const heuresCalcInput = row.querySelector('.heures-calculadas');
+        const hiddenDatesListInput = row.querySelector('.selected-dates-list');
+        
+        if (!startTimeInput || !endTimeInput || !heuresCalcInput || !hiddenDatesListInput) return;
+        
+        const isStartTimeValid = validateTimeInput(startTimeInput);
+        const isEndTimeValid = validateTimeInput(endTimeInput);
+        
+        const hoursPerSession = (isStartTimeValid && isEndTimeValid) 
+            ? calculateHoursSingleSession(startTimeInput.value, endTimeInput.value) 
+            : 0;
+        
+        const selectedDates = hiddenDatesListInput.value ? hiddenDatesListInput.value.split(',') : [];
+        const numberOfDates = selectedDates.length;
+        
+        const totalHours = hoursPerSession * numberOfDates;
+        heuresCalcInput.value = totalHours > 0 ? totalHours.toFixed(2) : '';
+    }
+
+    function handleTimeInputBlur(event) {
+        const input = event.target;
+        const currentValue = input.value.trim();
+        const row = input.closest('tr');
+        
+        if (fourDigitsRegex.test(currentValue)) {
+            const hh = currentValue.substring(0, 2);
+            const mm = currentValue.substring(2, 4);
+            
+            const hour = parseInt(hh, 10);
+            const minute = parseInt(mm, 10);
+            
+            if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
+                input.value = `${hh}:${mm}`;
+            }
+        }
+        
+        validateTimeInput(input);
+        updateRowHours(row);
+        checkAllLimits();
+    }
+
+    function handleActivityChange(event) {
+        const activitySelect = event.target;
+        const selectedActivity = activitySelect.value;
+        const row = activitySelect.closest('tr');
+        const categorySelect = row.querySelector('.categorie-select');
+        
+        if (categorySelect && activityCategoryMap.hasOwnProperty(selectedActivity)) {
+            const defaultCategory = activityCategoryMap[selectedActivity];
+            if (defaultCategory) {
+                categorySelect.value = defaultCategory;
+            }
+        }
+        
+        checkAllLimits();
+    }
+
+    function addRowInputListeners(row) {
+        const startTimeInput = row.querySelector('.start-time-input');
+        const endTimeInput = row.querySelector('.end-time-input');
+        const activitySelect = row.querySelector('.activite-select');
+        const categorySelect = row.querySelector('.categorie-select');
+        
+        const updateHourHandler = (event) => {
+            const currentRow = event.target.closest('tr');
+            if (currentRow) {
+                validateTimeInput(event.target);
+                updateRowHours(currentRow);
+            }
+        };
+        
+        const blurHandler = (event) => {
+            handleTimeInputBlur(event);
+        };
+        
+        const changeHandler = () => {
+            checkAllLimits();
+        };
+        
+        if (startTimeInput) {
+            startTimeInput.addEventListener('input', updateHourHandler);
+            startTimeInput.addEventListener('blur', blurHandler);
+        }
+        
+        if (endTimeInput) {
+            endTimeInput.addEventListener('input', updateHourHandler);
+            endTimeInput.addEventListener('blur', blurHandler);
+        }
+        
+        if (activitySelect) {
+            activitySelect.addEventListener('change', handleActivityChange);
+        }
+        
+        if (categorySelect) {
+            categorySelect.addEventListener('change', changeHandler);
+        }
+    }
+
+    function remplirEmploye() {
+        const select = document.getElementById('employe');
+        const selectedValue = select.value;
+        const adresseInput = document.getElementById('adresseEmploye');
+        const avsInput = document.getElementById('numeroAVS');
+        const dateNaissanceInput = document.getElementById('dateNaissance');
+        const etatCivilInput = document.getElementById('etatCivil');
+        const nombreEnfantsInput = document.getElementById('nombreEnfants');
+        const cantonInput = document.getElementById('canton');
+        const communeInput = document.getElementById('commune');
+        const nationaliteInput = document.getElementById('nationalite');
+        const signatureEmployeNom = document.getElementById('signatureEmployeNom');
+        
+        if (selectedValue) {
+            const infos = selectedValue.split('|');
+            adresseInput.value = infos[1] ? infos[1].trim() : '';
+            avsInput.value = infos[2] ? infos[2].trim() : '';
+            dateNaissanceInput.value = infos[3] ? infos[3].trim() : '';
+            etatCivilInput.value = infos[4] ? infos[4].trim() : '';
+            nombreEnfantsInput.value = infos[5] ? infos[5].trim() : '';
+            cantonInput.value = infos[6] ? infos[6].trim() : '';
+            communeInput.value = infos[7] ? infos[7].trim() : '';
+            nationaliteInput.value = infos[8] ? infos[8].trim() : '';
+            
+            // Atualizar nome na assinatura
+            const nomeEmploye = select.options[select.selectedIndex].text;
+            signatureEmployeNom.textContent = nomeEmploye;
+        } else {
+            adresseInput.value = '';
+            avsInput.value = '';
+            dateNaissanceInput.value = '';
+            etatCivilInput.value = '';
+            nombreEnfantsInput.value = '';
+            cantonInput.value = '';
+            communeInput.value = '';
+            nationaliteInput.value = '';
+            signatureEmployeNom.textContent = '-';
+        }
+        
+        periodeInput.value = '';
+        titreMoisSpan.textContent = '';
+        document.getElementById('periodoPagamento').textContent = '-';
+        if (tableBody) tableBody.innerHTML = '';
+        
+        ajouterLigne();
+        
+        document.querySelectorAll('.btn-select-dates').forEach(btn => {
+            btn.disabled = true;
+        });
+        
+        const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
+        if(openCalendarBtnGlobal) {
+            openCalendarBtnGlobal.disabled = true;
+        }
+        
+        document.getElementById('resultats').innerHTML = `<h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3><p>Veuillez sélectionner le mois...</p>`;
+        
+        alertArea.innerHTML = '';
+        
+        checkAllLimits();
+    }
+
+    function checkAllLimits() {
+        const selectedEmployeeOption = employeeSelect.options[employeeSelect.selectedIndex];
+        const currentEmployeeName = selectedEmployeeOption.value ? selectedEmployeeOption.text : null;
+        const periodeValue = periodeInput.value;
+        
+        alertArea.innerHTML = '';
+        
+        if (!currentEmployeeName || !periodeValue) {
+            return;
+        }
+        
+        const monthlyTotals = {
+            total: 0,
+            A: 0,
+            B: 0,
+            C: 0
+        };
+        
+        const weeklyTotals = {};
+        const weeklyCategoryTotals = {
+            'A': {},
+            'B': {},
+            'C': {}
+        };
+        
+        if (!tableBody) return;
+
+        tableBody.querySelectorAll('tr').forEach(row => {
+            const heuresCalcInput = row.querySelector('.heures-calculadas');
+            const categorieSelect = row.querySelector('.categorie-select');
+            const hiddenDatesListInput = row.querySelector('.selected-dates-list');
+            const startTimeInput = row.querySelector('.start-time-input');
+            const endTimeInput = row.querySelector('.end-time-input');
+            
+            if (heuresCalcInput && categorieSelect && hiddenDatesListInput && 
+                startTimeInput && endTimeInput && 
+                !startTimeInput.classList.contains('input-error') && 
+                !endTimeInput.classList.contains('input-error')) {
+                
+                const heuresLigne = parseFloat(heuresCalcInput.value) || 0;
+                const categorie = categorieSelect.value;
+                const selectedDatesStr = hiddenDatesListInput.value;
+                const hoursPerSession = calculateHoursSingleSession(startTimeInput.value, endTimeInput.value);
+                
+                if (heuresLigne > 0 && selectedDatesStr && hoursPerSession > 0) {
+                    monthlyTotals.total += heuresLigne;
+                    
+                    if (monthlyTotals.hasOwnProperty(categorie)) {
+                        monthlyTotals[categorie] += heuresLigne;
+                    }
+                    
+                    const dates = selectedDatesStr.split(',');
+                    dates.forEach(dateStr => {
+                        if (dateStr) {
+                            try {
+                                const dateParts = dateStr.split('-');
+                                const dateObj = new Date(Date.UTC(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2])));
+                                
+                                if (isNaN(dateObj.getTime())) throw new Error("Date invalide");
+                                
+                                const weekInfo = getWeekNumber(dateObj);
+                                const weekKey = `${weekInfo.year}-W${String(weekInfo.week).padStart(2, '0')}`;
+                                
+                                if (!weeklyTotals[weekKey]) weeklyTotals[weekKey] = 0;
+                                weeklyTotals[weekKey] += hoursPerSession;
+                                
+                                if (!weeklyCategoryTotals[categorie][weekKey]) weeklyCategoryTotals[categorie][weekKey] = 0;
+                                weeklyCategoryTotals[categorie][weekKey] += hoursPerSession;
+                                
+                            } catch (e) {
+                                console.error("Err date weekly limit parse:", dateStr, e);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        
+        let alertHTML = '<ul>';
+        let hasAlerts = false;
+        
+        Object.keys(weeklyTotals).sort().forEach(weekKey => {
+            const hours = weeklyTotals[weekKey];
+            const weekNum = weekKey.split('W')[1];
+            
+            if (hours > LIMITE_HEBDO_INDIV) {
+                hasAlerts = true;
+                alertHTML += `<li><div class="alert alert-danger">DÉPASSÉ: Semaine ${weekNum}: ${hours.toFixed(2)}h / ${LIMITE_HEBDO_INDIV}h max!</div></li>`;
+            } else if (hours > LIMITE_HEBDO_AVERTISSEMENT) {
+                hasAlerts = true;
+                alertHTML += `<li><div class="alert alert-warning">ATTENTION: Semaine ${weekNum}: ${hours.toFixed(2)}h / ${LIMITE_HEBDO_INDIV}h max.</div></li>`;
+            }
+        });
+        
+        ['A', 'B', 'C'].forEach(cat => {
+            Object.keys(weeklyCategoryTotals[cat]).sort().forEach(weekKey => {
+                const hours = weeklyCategoryTotals[cat][weekKey];
+                const weekNum = weekKey.split('W')[1];
+                const catLimit = LIMITES_HEBDO_CATEGORIE[cat];
+                
+                if (hours > catLimit) {
+                    hasAlerts = true;
+                    alertHTML += `<li><div class="alert alert-warning">FINANCEMENT: Catégorie ${cat}, Semaine ${weekNum}: ${hours.toFixed(2)}h dépasse la limite de ${catLimit}h</div></li>`;
+                }
+            });
+        });
+        
+        if (monthlyTotals.total > LIMITE_MENSUEL_GLOBAL) {
+            hasAlerts = true;
+            alertHTML += `<li><div class="alert alert-danger">DÉPASSÉ: Total mensuel: ${monthlyTotals.total.toFixed(2)}h dépasse la limite globale de ${LIMITE_MENSUEL_GLOBAL}h!</div></li>`;
+        } else if (monthlyTotals.total > 0) {
+            hasAlerts = true;
+            alertHTML += `<li><div class="alert alert-info">Total mensuel: ${monthlyTotals.total.toFixed(2)}h / ${LIMITE_MENSUEL_GLOBAL}h max.</div></li>`;
+        }
+        
+        if (monthlyTotals.total > 0) {
+            hasAlerts = true;
+            alertHTML += '<li><div class="alert alert-info" style="margin-top: 5px;"><strong>Totaux / Catégorie (vs Limites Financement Mensuel):</strong><ul>';
+            
+            let catDetail = '';
+            ['A', 'B', 'C'].forEach(cat => {
+                const limiteCat = LIMITES_MENSUELLES_CATEGORIE[cat];
+                const totalCat = monthlyTotals[cat];
+                const status = totalCat > limiteCat ? ' <strong style="color:#dc3545;">(DÉPASSÉ)</strong>' : '';
+                
+                catDetail += `<li style="font-size:0.9em;">Cat ${cat}: ${totalCat.toFixed(2)}h / ${limiteCat}h${status}</li>`;
+            });
+            
+            alertHTML += catDetail + '</ul></div></li>';
+        }
+        
+        if (hasAlerts) {
+            alertHTML += '</ul>';
+            alertArea.innerHTML = alertHTML;
+        } else if(currentEmployeeName && periodeValue) {
+            alertArea.innerHTML = `<div class="alert alert-info">Aucun avertissement de limite pour le moment.</div>`;
+        }
+    }
+
+    function calculerSalaire() {
+        let salaireBrut = 0;
+        let totalHeuresCalculeesGlobal = 0;
+        let totalHeuresExtras = 0;
+        const resultatsDiv = document.getElementById('resultats');
+        
+        // Obter valores das horas extras
+        const heuresExtras = parseFloat(document.getElementById('heuresExtras').value) || 0;
+        const tauxHeuresExtras = parseFloat(document.getElementById('tauxHeuresExtras').value) || 125;
+        const bonus = parseFloat(document.getElementById('bonus').value) || 0;
+        
+        let calculDetailsHtml = `
+            <h3><i class="fas fa-list-ul fa-fw"></i> Détail des Prestations</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Activité</th>
+                        <th class="center">Jours Travaillés</th>
+                        <th class="center">Cat.</th>
+                        <th class="center">Début</th>
+                        <th class="center">Fin</th>
+                        <th class="right">Heures (Total Ligne)</th>
+                        <th class="right">Tarif/h</th>
+                        <th class="right">Total Ligne (CHF)</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        
+        let hasValidEntries = false;
+        let hasInvalidTimes = false;
+        
+        if (!tableBody) return;
+
+        document.querySelectorAll('#tableTravaux tbody tr').forEach(row => {
+            updateRowHours(row);
+            
+            const activiteSelect = row.querySelector('.activite-select');
+            const displayDatesSpan = row.querySelector('.display-dates');
+            const categorieSelect = row.querySelector('.categorie-select');
+            const startTimeInput = row.querySelector('.start-time-input');
+            const endTimeInput = row.querySelector('.end-time-input');
+            const heuresCalcInput = row.querySelector('.heures-calculadas');
+            
+            if (!activiteSelect || !displayDatesSpan || !categorieSelect || 
+                !startTimeInput || !endTimeInput || !heuresCalcInput) return;
+            
+            if (startTimeInput.classList.contains('input-error') || 
+                endTimeInput.classList.contains('input-error')) {
+                hasInvalidTimes = true;
+            }
+            
+            const activite = activiteSelect.value;
+            const joursDisplay = displayDatesSpan.textContent === 'Aucun jour' ? '-' : displayDatesSpan.textContent;
+            const categorie = categorieSelect.value;
+            const startTime = startTimeInput.value;
+            const endTime = endTimeInput.value;
+            const heuresLigne = parseFloat(heuresCalcInput.value) || 0;
+            
+            if (activite && heuresLigne > 0 && tarifs[categorie] && 
+                !startTimeInput.classList.contains('input-error') && 
+                !endTimeInput.classList.contains('input-error')) {
+                
+                hasValidEntries = true;
+                const tarifHoraire = tarifs[categorie];
+                const totalLigne = heuresLigne * tarifHoraire;
+                
+                salaireBrut += totalLigne;
+                totalHeuresCalculeesGlobal += heuresLigne;
+                
+                calculDetailsHtml += `
+                    <tr>
+                        <td>${activite}</td>
+                        <td class="center">${joursDisplay}</td>
+                        <td class="center">${categorie}</td>
+                        <td class="center">${startTime || '-'}</td>
+                        <td class="center">${endTime || '-'}</td>
+                        <td class="right">${heuresLigne.toFixed(2)}</td>
+                        <td class="right">${tarifHoraire.toFixed(2)}</td>
+                        <td class="right">${totalLigne.toFixed(2)}</td>
+                    </tr>
+                `;
+            }
+        });
+        
+        calculDetailsHtml += `</tbody></table>`;
+        
+        if (hasInvalidTimes) {
+            resultatsDiv.innerHTML = `
+                <h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3>
+                <p style="color: red;">Veuillez corriger les heures invalides (marquées en rouge).</p>
+                ${calculDetailsHtml}
+            `;
+            return;
+        }
+        
+        if (!hasValidEntries && heuresExtras === 0 && bonus === 0) {
+            resultatsDiv.innerHTML = `
+                <h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3>
+                <p style="color: red;">Veuillez renseigner au moins une ligne valide ou des heures extras/bonus.</p>
+            `;
+            return;
+        }
+        
+        // Calcular horas extras
+        let salaireHeuresExtras = 0;
+        if (heuresExtras > 0) {
+            // Usar tarifa média ou tarifa B como base para horas extras
+            const tarifMoyenHeuresExtras = tarifs['B']; // Ou calcular média das tarifas usadas
+            salaireHeuresExtras = heuresExtras * tarifMoyenHeuresExtras * (tauxHeuresExtras / 100);
+            totalHeuresExtras = heuresExtras;
+        }
+        
+        // Total bruto incluindo horas extras e bonus
+        const salaireBrutTotal = salaireBrut + salaireHeuresExtras + bonus;
+        
+        const avsRate = 0.053; // 5.3%
+        const acRate = 0.011;  // 1.1%
+        const lppRate = 0.075; // 7.5%
+        const accidentRate = 0.01; // 1%
+        
+        const avsDeduction = salaireBrutTotal * avsRate;
+        const acDeduction = salaireBrutTotal * acRate;
+        const lppDeduction = salaireBrutTotal * lppRate;
+        const accidentDeduction = salaireBrutTotal * accidentRate;
+        
+        const totalDeductions = avsDeduction + acDeduction + lppDeduction + accidentDeduction;
+        const salaireNet = salaireBrutTotal - totalDeductions;
+        
+        // Verificar se benefícios estão habilitados
+        const includeVacances = document.getElementById('includeVacances')?.checked || false;
+        const include13eme = document.getElementById('include13eme')?.checked || false;
+        
+        // Calcular valores dos benefícios
+        let vacancesValue = 0;
+        let treizeValue = 0;
+        let salaireBrutAjuste = salaireBrutTotal;
+        
+        if (includeVacances || include13eme) {
+            let benefitsPercent = 0;
+            if (includeVacances) benefitsPercent += 0.0833; // 8.33%
+            if (include13eme) benefitsPercent += 0.0833; // 8.33%
+            
+            // Calcular salário base ajustado
+            salaireBrutAjuste = salaireBrutTotal / (1 + benefitsPercent);
+            
+            if (includeVacances) {
+                vacancesValue = salaireBrutAjuste * 0.0833;
+            }
+            if (include13eme) {
+                treizeValue = salaireBrutAjuste * 0.0833;
+            }
+        }
+        
+        resultatsDiv.innerHTML = `
+            ${calculDetailsHtml}
+            <p class="lpp-comment" style="font-size:0.8em; color: #6c757d; text-align: right;">
+                <i>* LPP et Assurance Accidents basés sur des taux fixes simplifiés.</i>
+            </p>
+            <h3><i class="fas fa-file-invoice-dollar fa-fw"></i> Résumé du Salaire du Mois</h3>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="total-label"><i class="fas fa-clock fa-fw"></i> Total Heures Travaillées (Activités)</td>
+                        <td class="total-value">${totalHeuresCalculeesGlobal.toFixed(2)} h</td>
+                    </tr>
+                    ${totalHeuresExtras > 0 ? `
+                    <tr>
+                        <td class="total-label"><i class="fas fa-clock fa-fw"></i> Heures Extras (${tauxHeuresExtras}%)</td>
+                        <td class="total-value">${totalHeuresExtras.toFixed(2)} h</td>
+                    </tr>` : ''}
+                    <tr>
+                        <td class="total-label"><i class="fas fa-coins fa-fw"></i> Salaire ${(includeVacances || include13eme) ? 'Base' : 'Brut'} (Activités)</td>
+                        <td class="total-value">CHF ${(includeVacances || include13eme) ? salaireBrutAjuste.toFixed(2) : salaireBrut.toFixed(2)}</td>
+                    </tr>
+                    ${salaireHeuresExtras > 0 ? `
+                    <tr>
+                        <td class="total-label"><i class="fas fa-plus fa-fw"></i> Heures Extras</td>
+                        <td class="total-value">CHF ${salaireHeuresExtras.toFixed(2)}</td>
+                    </tr>` : ''}
+                    ${bonus > 0 ? `
+                    <tr>
+                        <td class="total-label"><i class="fas fa-award fa-fw"></i> Bonus/Primes</td>
+                        <td class="total-value">CHF ${bonus.toFixed(2)}</td>
+                    </tr>` : ''}
+                    ${includeVacances ? `
+                    <tr class="benefits-header">
+                        <td class="total-label"><i class="fas fa-umbrella-beach fa-fw"></i> Indemnité de vacances (8,33%)</td>
+                        <td class="total-value">CHF ${vacancesValue.toFixed(2)}</td>
+                    </tr>` : ''}
+                    ${include13eme ? `
+                    <tr class="benefits-header">
+                        <td class="total-label"><i class="fas fa-gift fa-fw"></i> 13ème salaire (8,33%)</td>
+                        <td class="total-value">CHF ${treizeValue.toFixed(2)}</td>
+                    </tr>` : ''}
+                    <tr>
+                        <td class="total-label"><i class="fas fa-calculator fa-fw"></i> <strong>Salaire Brut Total</strong></td>
+                        <td class="total-value"><strong>CHF ${salaireBrutTotal.toFixed(2)}</strong></td>
+                    </tr>
+                    <tr class="deductions-header">
+                        <td colspan="2" style="background-color: #e9ecef; font-weight: bold; padding-top: 15px;">
+                            <i class="fas fa-circle-minus fa-fw"></i> Déductions Sociales
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>AVS/AI/APG <span class="deduction-percentage">(${(avsRate*100).toFixed(1)}%)</span></td>
+                        <td class="total-value">CHF ${avsDeduction.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                        <td>AC (Assurance-chômage) <span class="deduction-percentage">(${(acRate*100).toFixed(1)}%)</span></td>
+                        <td class="total-value">CHF ${acDeduction.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                        <td>LPP (Prévoyance prof.)* <span class="deduction-percentage">(${(lppRate*100).toFixed(1)}%)</span></td>
+                        <td class="total-value">CHF ${lppDeduction.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                        <td>Assurance Accidents (non prof.)* <span class="deduction-percentage">(${(accidentRate*100).toFixed(1)}%)</span></td>
+                        <td class="total-value">CHF ${accidentDeduction.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                        <td class="total-label"><i class="fas fa-calculator fa-fw"></i> Total des Déductions</td>
+                        <td class="total-value">CHF ${totalDeductions.toFixed(2)}</td>
+                    </tr>
+                    <tr class="net-salary">
+                        <td class="total-label"><i class="fas fa-hand-holding-usd fa-fw"></i> Salaire Net</td>
+                        <td class="total-value">CHF ${salaireNet.toFixed(2)}</td>
+                    </tr>
+                </tbody>
+            </table>
+        `;
+        
+        checkAllLimits();
+    }
+
+    // Inicialização quando o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', () => {
+        tableBody = document.getElementById('tableTravaux').getElementsByTagName('tbody')[0];
+        
+        flatpickr("#periode", {
+            plugins: [
+                new monthSelectPlugin({
+                    shorthand: true, 
+                    dateFormat: "Y-m",
+                    altFormat: "F Y",
+                })
+            ],
+            locale: "fr",
+            onChange: function(selectedDates, dateStr, instance) {
+                const event = new Event('change', { bubbles: true });
+                periodeInput.dispatchEvent(event);
+            }
+        });
+
+        if (tableBody) {
+            ajouterLigne();
+            
+            document.querySelectorAll('.btn-select-dates').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
+            if(openCalendarBtnGlobal) {
+                openCalendarBtnGlobal.disabled = true;
+            }
+        } else {
+            console.error("Erro: Não foi possível encontrar o tbody da tabela.");
+        }
+    });
+
+    // Funções de impressão específicas
+    function imprimerPourEmployeur() {
+        // Mostra os alertas para o empregador
+        const alertArea = document.getElementById('alert-area');
+        if (alertArea) {
+            alertArea.style.display = 'block';
+        }
+        window.print();
+    }
+
+    function imprimerPourEmploye() {
+        // Oculta os alertas para o empregado
+        const alertArea = document.getElementById('alert-area');
+        if (alertArea) {
+            alertArea.style.display = 'none';
+        }
+        window.print();
+        // Restaura a exibição dos alertas após a impressão
+        setTimeout(() => {
+            if (alertArea) {
+                alertArea.style.display = 'block';
+            }
+        }, 1000);
+    }
+</script>
+</body>
+</html>
+

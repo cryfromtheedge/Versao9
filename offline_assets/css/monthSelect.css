@@ -1,0 +1,31 @@
+/* Month Select Plugin CSS */
+.flatpickr-monthSelect-months {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.flatpickr-monthSelect-month {
+    width: 25%;
+    text-align: center;
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin: 2px;
+    transition: background-color 0.2s;
+}
+
+.flatpickr-monthSelect-month:hover {
+    background-color: #e6f3ff;
+}
+
+.flatpickr-monthSelect-month.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.flatpickr-monthSelect-month.today {
+    font-weight: bold;
+    border: 2px solid #007bff;
+}
+
