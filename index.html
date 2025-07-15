@@ -168,1154 +168,214 @@
 <div class="container">
     <div class="header">
         <div class="header-title">
-            <h1>Fiche de Salaire Mensuelle<span id="mois-annee-titre"></span></h1>
+            <h1 data-i18n="payslip-title">Fiche de Salaire Mensuelle</h1><span id="mois-annee-titre"></span>
         </div>
         <div class="header-info">
-            <div class="ficha-numero">Fiche N°: <span id="numeroFicha">2025-001</span></div>
-            <div class="periodo-pagamento">Période: <span id="periodoPagamento">-</span></div>
+            <div class="ficha-numero"><span data-i18n="payslip-number">Fiche N°:</span> <span id="numeroFicha">2025-001</span></div>
+            <div class="periodo-pagamento"><span data-i18n="payment-period">Période:</span> <span id="periodoPagamento">-</span></div>
             <div class="header-logos">
                 <img src="offline_assets/img/100px-Flag_of_Switzerland.svg.png" alt="Drapeau Suisse">
                 <img src="offline_assets/img/1024px-Flag_of_Canton_of_Bern.svg.png" alt="Bandeira do Cantão de Berna">
             </div>
         </div>
     </div>
-        <div class="section">
-        <h2><i class="fas fa-building fa-fw"></i> Informations Employeur</h2>
+    <div class="section">
+        <h2 data-i18n="employer-information"><i class="fas fa-building fa-fw"></i> Informations Employeur</h2>
         <div class="employer-info">
-            <p><i class="fas fa-user fa-fw"></i> <strong>Nom:</strong> Emanuel Diniz Magalhães</p>
-            <p><i class="fas fa-map-marker-alt fa-fw"></i> <strong>Adresse:</strong> Rue de la gare 24, 2605 Sonceboz</p>
-            <p><i class="fas fa-info-circle fa-fw"></i> <strong>Ressources :</strong> l'Allocation pour Impotant Assurance-invalidité (AI), Contribution d'assistance | Assurance-invalidité (AI), LPHand Canton de Berne, Les prestations complémentaires (PC) | Les frais de maladie et d'invalidité</p>
+            <p><i class="fas fa-user fa-fw"></i> <strong data-i18n="employer-name">Nom:</strong> Emanuel Diniz Magalhães</p>
+            <p><i class="fas fa-map-marker-alt fa-fw"></i> <strong data-i18n="employer-address">Adresse:</strong> Rue de la gare 24, 2605 Sonceboz</p>
+            <p><i class="fas fa-info-circle fa-fw"></i> <strong data-i18n="employer-resources">Ressources :</strong> l'Allocation pour Impotant Assurance-invalidité (AI), Contribution d'assistance | Assurance-invalidité (AI), LPHand Canton de Berne, Les prestations complémentaires (PC) | Les frais de maladie et d'invalidité</p>
         </div>
     </div>
 
     <!-- Nova seção de configuração de benefícios -->
     <div class="section benefits-config">
-        <h2><i class="fas fa-calculator fa-fw"></i> Configuration des Avantages Sociaux</h2>
-        
+        <h2 data-i18n="social-benefits-configuration"><i class="fas fa-calculator fa-fw"></i> Configuration des Avantages Sociaux</h2>
+
         <div class="benefits-info">
-            <p><i class="fas fa-info-circle"></i> <strong>Tarifas LPHand:</strong> Cat. A: CHF 65,15/h | Cat. B: CHF 52,95/h | Cat. C: CHF 35,30/h</p>
-            <p><i class="fas fa-exclamation-triangle"></i> <strong>Important:</strong> Pour inclure les avantages sociaux dans le budget LPHand, le salaire horaire doit être ajusté.</p>
+            <p><i class="fas fa-info-circle"></i> <strong data-i18n="lphand-rates">Tarifas LPHand:</strong> Cat. A: CHF 65,15/h | Cat. B: CHF 52,95/h | Cat. C: CHF 35,30/h</p>
+            <p><i class="fas fa-exclamation-triangle"></i> <strong data-i18n="important-notice">Important:</strong> <span data-i18n="benefits-inclusion-notice">Pour inclure les avantages sociaux dans le budget LPHand, le salaire horaire doit être ajusté.</span></p>
         </div>
 
         <div class="benefits-toggle">
             <input type="checkbox" id="includeVacances" checked>
             <label for="includeVacances">
-                <i class="fas fa-umbrella-beach"></i> Inclure Indemnité de vacances (8,33%)
+                <i class="fas fa-umbrella-beach"></i> <span data-i18n="include-holiday-allowance">Inclure Indemnité de vacances (8,33%)</span>
             </label>
-            <span style="color: #dc3545; font-weight: bold;">OBLIGATOIRE selon l'art. 329a CO</span>
+            <span style="color: #dc3545; font-weight: bold;" data-i18n="mandatory-by-law">OBLIGATOIRE selon l'art. 329a CO</span>
         </div>
 
         <div class="benefits-toggle">
             <input type="checkbox" id="include13eme">
             <label for="include13eme">
-                <i class="fas fa-gift"></i> Inclure 13ème salaire (8,33%)
+                <i class="fas fa-gift"></i> <span data-i18n="include-13th-month-salary">Inclure 13ème salaire (8,33%)</span>
             </label>
-            <span style="color: #6c757d;">Facultatif - uniquement si prévu au contrat</span>
+            <span style="color: #6c757d;" data-i18n="optional-if-in-contract">Facultatif - uniquement si prévu au contrat</span>
         </div>
 
         <div id="benefitsCalculator" style="display: block;">
-            <h4><i class="fas fa-chart-line"></i> Tarifas Ajustadas Recommandées</h4>
+            <h4 data-i18n="recommended-adjusted-rates"><i class="fas fa-chart-line"></i> Tarifas Ajustadas Recommandées</h4>
             <div class="scenario-comparison">
                 <div class="scenario current">
-                    <h5>Avec Férias Seulement (Recommandé)</h5>
+                    <h5 data-i18n="with-holidays-only">Avec Férias Seulement (Recommandé)</h5>
                     <p><strong>Cat. A:</strong> CHF 60,14/h (au lieu de CHF 65,15)</p>
                     <p><strong>Cat. B:</strong> CHF 48,88/h (au lieu de CHF 52,95)</p>
                     <p><strong>Cat. C:</strong> CHF 32,59/h (au lieu de CHF 35,30)</p>
-                    <p class="success"><i class="fas fa-check-circle"></i> Reste dans le budget LPHand</p>
+                    <p class="success"><i class="fas fa-check-circle"></i> <span data-i18n="remaining-in-lphand-budget">Reste dans le budget LPHand</span></p>
                 </div>
-                
+
                 <div class="scenario adjusted">
-                    <h5>Avec Férias + 13ème Salaire</h5>
+                    <h5 data-i18n="with-holidays-and-13th-month">Avec Férias + 13ème Salaire</h5>
                     <p><strong>Cat. A:</strong> CHF 55,85/h</p>
                     <p><strong>Cat. B:</strong> CHF 45,39/h</p>
                     <p><strong>Cat. C:</strong> CHF 30,26/h</p>
-                    <p class="warning"><i class="fas fa-exclamation-triangle"></i> Salaire base réduit</p>
+                    <p class="warning"><i class="fas fa-exclamation-triangle"></i> <span data-i18n="base-salary-reduced">Salaire base réduit</span></p>
                 </div>
             </div>
-            
+
             <div class="alert alert-info">
-                <strong><i class="fas fa-lightbulb"></i> Recommandation:</strong> Utilisez les tarifas ajustadas pour inclure automatiquement les bénéfices sélectionnés dans le budget LPHand disponible.
+                <strong><i class="fas fa-lightbulb"></i> <span data-i18n="recommendation">Recommandation:</span></strong> <span data-i18n="recommendation-text">Utilisez les tarifas ajustadas pour inclure automatiquement les bénéfices sélectionnés dans le budget LPHand disponible.</span>
             </div>
         </div>
     </div>
 
-        <h2><i class="fas fa-user-friends fa-fw"></i> Informations Employé(e)</h2>
-        <div class="employee-info-grid">
-            <div class="form-row">
-                <div class="form-col">
-                    <label for="employe"><i class="fas fa-user-check fa-fw"></i> Sélectionner Employé(e):</label>
-                    <select id="employe" onchange="remplirEmploye()">
-                        <option value="">-- Choisir un(e) employé(e) --</option>
-                        <option value="Laryssa Cultrona|Rue de l'Hôpital 15, 2800 Delémont|756.6907.9670.66|2001-08-09|Célibataire|0|Jura|Delémont|Suisse|Citoyenne">Laryssa Cultrona</option>
-                                     <option value="Flávia Giglio Spampinato|Rue Pierre-Péquignat 17, 2854 Bassecourt|756.7147.6716.38|1977-09-09|Divorcée|2|Jura|mixte de Haute-Sorne|Italienne|Permis C">Flávia Giglio Spampinato</option>
-                    </select>
-                </div>
-                <div class="form-col">
-                    <label for="adresseEmploye"><i class="fas fa-home fa-fw"></i> Adresse Employé(e):</label>
-                    <textarea id="adresseEmploye" rows="3" readonly></textarea>
-                </div>
+    <h2 data-i18n="employee-information"><i class="fas fa-user-friends fa-fw"></i> Informations Employé(e)</h2>
+    <div class="employee-info-grid">
+        <div class="form-row">
+            <div class="form-col">
+                <label for="employe"><i class="fas fa-user-check fa-fw"></i> <span data-i18n="select-employee">Sélectionner Employé(e):</span></label>
+                <select id="employe" onchange="fillEmployeeInformation()">
+                    <option value="">-- Choisir un(e) employé(e) --</option>
+                </select>
             </div>
-            
-            <div class="form-row">
-                <div class="form-col-small">
-                    <label for="numeroAVS"><i class="fas fa-hashtag fa-fw"></i> Numéro AVS:</label>
-                    <input type="text" id="numeroAVS" readonly>
-                </div>
-                <div class="form-col-small">
-                    <label for="dateNaissance"><i class="fas fa-birthday-cake fa-fw"></i> Date de Naissance:</label>
-                    <input type="date" id="dateNaissance" readonly>
-                </div>
-                <div class="form-col-small">
-                    <label for="etatCivil"><i class="fas fa-heart fa-fw"></i> État Civil:</label>
-                    <input type="text" id="etatCivil" readonly>
-                </div>
-                <div class="form-col-small">
-                    <label for="nombreEnfants"><i class="fas fa-child fa-fw"></i> Enfants:</label>
-                    <input type="number" id="nombreEnfants" readonly>
-                </div>
+            <div class="form-col">
+                <label for="adresseEmploye"><i class="fas fa-home fa-fw"></i> <span data-i18n="employee-address">Adresse Employé(e):</span></label>
+                <textarea id="adresseEmploye" rows="3" readonly></textarea>
             </div>
-            
-            <div class="form-row">
-                <div class="form-col-small">
-                    <label for="canton"><i class="fas fa-map fa-fw"></i> Canton:</label>
-                    <input type="text" id="canton" readonly>
-                </div>
-                <div class="form-col-small">
-                    <label for="commune"><i class="fas fa-map-pin fa-fw"></i> Commune:</label>
-                    <input type="text" id="commune" readonly>
-                </div>
-                <div class="form-col-small">
-                    <label for="nationalite"><i class="fas fa-flag fa-fw"></i> Nationalité:</label>
-                    <input type="text" id="nationalite" readonly>
-                </div>
-                <div class="form-col period-selector-col">
-                    <label for="periode"><i class="fas fa-calendar-alt fa-fw"></i> Mois / Année de référence:</label>
-                    <div class="period-selector-inputs">
-                        <div><input type="text" id="periode" placeholder="Sélectionner le mois..."></div>
-                        <div>
-                            <button type="button" id="openCalendarBtnGlobal" class="secondary" disabled title="Choisir les jours pour les lignes ci-dessous">
-                                <i class="fas fa-calendar-plus"></i>
-                            </button>
-                        </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-col-small">
+                <label for="numeroAVS"><i class="fas fa-hashtag fa-fw"></i> <span data-i18n="avs-number">Numéro AVS:</span></label>
+                <input type="text" id="numeroAVS" readonly>
+            </div>
+            <div class="form-col-small">
+                <label for="dateNaissance"><i class="fas fa-birthday-cake fa-fw"></i> <span data-i18n="birth-date">Date de Naissance:</span></label>
+                <input type="date" id="dateNaissance" readonly>
+            </div>
+            <div class="form-col-small">
+                <label for="etatCivil"><i class="fas fa-heart fa-fw"></i> <span data-i18n="civil-status">État Civil:</span></label>
+                <input type="text" id="etatCivil" readonly>
+            </div>
+            <div class="form-col-small">
+                <label for="nombreEnfants"><i class="fas fa-child fa-fw"></i> <span data-i18n="children">Enfants:</span></label>
+                <input type="number" id="nombreEnfants" readonly>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-col-small">
+                <label for="canton"><i class="fas fa-map fa-fw"></i> <span data-i18n="canton">Canton:</span></label>
+                <input type="text" id="canton" readonly>
+            </div>
+            <div class="form-col-small">
+                <label for="commune"><i class="fas fa-map-pin fa-fw"></i> <span data-i18n="commune">Commune:</span></label>
+                <input type="text" id="commune" readonly>
+            </div>
+            <div class="form-col-small">
+                <label for="nationalite"><i class="fas fa-flag fa-fw"></i> <span data-i18n="nationality">Nationalité:</span></label>
+                <input type="text" id="nationalite" readonly>
+            </div>
+            <div class="form-col period-selector-col">
+                <label for="periode"><i class="fas fa-calendar-alt fa-fw"></i> <span data-i18n="reference-month-year">Mois / Année de référence:</span></label>
+                <div class="period-selector-inputs">
+                    <div><input type="text" id="periode" data-i18n="select-month" placeholder="Sélectionner le mois..."></div>
+                    <div>
+                        <button type="button" id="openCalendarBtnGlobal" class="secondary" disabled data-i18n="choose-days-for-lines" title="Choisir les jours pour les lignes ci-dessous">
+                            <i class="fas fa-calendar-plus"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+    </div>
+
     <div class="section">
-        <h2><i class="fas fa-clock fa-fw"></i> Heures Extras et Bonus</h2>
+        <h2 data-i18n="overtime-and-bonuses"><i class="fas fa-clock fa-fw"></i> Heures Extras et Bonus</h2>
         <div class="form-row">
             <div class="form-col-small">
-                <label for="heuresExtras"><i class="fas fa-clock fa-fw"></i> Heures Extras:</label>
+                <label for="heuresExtras"><i class="fas fa-clock fa-fw"></i> <span data-i18n="overtime-hours">Heures Extras:</span></label>
                 <input type="number" id="heuresExtras" step="0.01" placeholder="0.00">
             </div>
             <div class="form-col-small">
-                <label for="tauxHeuresExtras"><i class="fas fa-percentage fa-fw"></i> Taux Majoré (%):</label>
+                <label for="tauxHeuresExtras"><i class="fas fa-percentage fa-fw"></i> <span data-i18n="increased-rate-percentage">Taux Majoré (%):</span></label>
                 <input type="number" id="tauxHeuresExtras" step="0.1" placeholder="125" value="125">
             </div>
             <div class="form-col">
-                <label for="bonus"><i class="fas fa-award fa-fw"></i> Bonus/Primes (CHF):</label>
+                <label for="bonus"><i class="fas fa-award fa-fw"></i> <span data-i18n="bonus-primes-chf">Bonus/Primes (CHF):</span></label>
                 <input type="number" id="bonus" step="0.01" placeholder="0.00">
             </div>
         </div>
     </div>
-    
+
     <div id="alert-area"></div>
-    
+
     <div class="section" id="activites-input-section">
-        <h2><i class="fas fa-tasks fa-fw"></i> Détails des Activités Réalisées</h2>
-        <p style="font-size: 0.9em; color: #6c757d;"><i>Selecione a atividade – a categoria será sugerida...</i></p>
+        <h2 data-i18n="details-of-activities"><i class="fas fa-tasks fa-fw"></i> Détails des Activités Réalisées</h2>
+        <p style="font-size: 0.9em; color: #6c757d;"><i data-i18n="select-activity-category-suggested">Selecione a atividade – a categoria será sugerida...</i></p>
         <table id="tableTravaux">
             <thead>
                 <tr>
-                    <th>Activité</th>
-                    <th class="center" style="width: 150px;">Jours Travaillés</th>
-                    <th class="center" style="width: 140px;">Catégorie</th>
-                    <th class="center" style="width: 90px;">Début</th>
-                    <th class="center" style="width: 90px;">Fin</th>
-                    <th class="right" style="width: 90px;">Heures (Total)</th>
+                    <th data-i18n="activity">Activité</th>
+                    <th class="center" style="width: 150px;" data-i18n="worked-days">Jours Travaillés</th>
+                    <th class="center" style="width: 140px;" data-i18n="category">Catégorie</th>
+                    <th class="center" style="width: 90px;" data-i18n="start">Début</th>
+                    <th class="center" style="width: 90px;" data-i18n="end">Fin</th>
+                    <th class="right" style="width: 90px;" data-i18n="total-hours">Heures (Total)</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
         <div class="button-group" style="text-align: left; margin-top: 15px;">
-            <button type="button" class="secondary" onclick="ajouterLigne()">
-                <i class="fas fa-plus"></i> Ajouter une ligne
+            <button type="button" class="secondary" onclick="addActivityRow()">
+                <i class="fas fa-plus"></i> <span data-i18n="add-line">Ajouter une ligne</span>
             </button>
         </div>
     </div>
-    
+
     <div class="button-group">
-        <button type="button" onclick="calculerSalaire()">
-            <i class="fas fa-calculator"></i> Calculer le Salaire
+        <button type="button" onclick="calculateSalary()">
+            <i class="fas fa-calculator"></i> <span data-i18n="calculate-salary">Calculer le Salaire</span>
         </button>
-        <button type="button" onclick="imprimerPourEmployeur()">
-            <i class="fas fa-print"></i> Imprimer (Employeur)
+        <button type="button" onclick="printForEmployer()">
+            <i class="fas fa-print"></i> <span data-i18n="print-for-employer">Imprimer (Employeur)</span>
         </button>
-        <button type="button" onclick="imprimerPourEmploye()">
-            <i class="fas fa-file-pdf"></i> Imprimer (Employé)
+        <button type="button" onclick="printForEmployee()">
+            <i class="fas fa-file-pdf"></i> <span data-i18n="print-for-employee">Imprimer (Employé)</span>
         </button>
     </div>
-    
+
     <div id="resultats" class="section">
-        <h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3>
-        <p>Veuillez sélectionner le mois...</p>
+        <h3 data-i18n="calculation-results"><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3>
+        <p data-i18n="please-select-month">Veuillez sélectionner le mois...</p>
+    </div>
+
+    <div id="language-switcher">
+        <button onclick="setLanguage('fr')">FR</button>
     </div>
 </div>
 
 <script src="offline_assets/js/flatpickr.min.js"></script>
 <script src="offline_assets/js/fr.js"></script>
 <script src="offline_assets/js/monthSelect.js"></script>
-<script>
-    // --- JavaScript com Inicialização e Variáveis Globais ---
-    let sharedFlatpickrInstance = null;
-    const periodeInput = document.getElementById('periode');
-    let tableBody = null;
-    const titreMoisSpan = document.getElementById('mois-annee-titre');
-    const alertArea = document.getElementById('alert-area');
-    const employeeSelect = document.getElementById('employe');
-    const timeFormatRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-    const fourDigitsRegex = /^\d{4}$/;
-    
-    const moisEnFrancais = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
-
-    // Valores atualizados das tarifas por categoria
-    const tarifs = {'A': 65.15, 'B': 52.95, 'C': 35.30};
-    const activityCategoryMap = { 
-        "Actes ordinaires de la vie": "B", 
-        "Tenue du ménage": "B", 
-        "Participation à la vie sociale et loisirs": "A", 
-        "Soins particulièrement astreignants": "B", 
-        "Domaine de la vie": "C", 
-        "Domaine Surveillance pendant la journe": "B", 
-        "Domaine Surveillance pendant la journe/Nuit": "C", 
-        "Logement": "B", 
-        "Travail et formation": "A", 
-        "Relations sociales": "A", 
-        "Loisirs": "A", 
-        "Santé et bien-être": "B", 
-        "Exercices dextérité/mémoire": "A" 
-    };
-    
-    // Limites corrigidos
-    const LIMITE_HEBDO_INDIV = 50;
-    const LIMITE_HEBDO_AVERTISSEMENT = 45;
-    const LIMITE_MENSUEL_GLOBAL = 250;
-    
-    const LIMITES_HEBDO_CATEGORIE = { 
-        'A': 7,
-        'B': 29,
-        'C': 76
-    };
-    
-    const LIMITES_MENSUELLES_CATEGORIE = { 
-        'A': 32,
-        'B': 102,
-        'C': 218
-    };
-
-    // Inicialização da data de emissão
-    document.addEventListener('DOMContentLoaded', () => {
-        const hoje = new Date();
-        const dataFormatada = hoje.toLocaleDateString('fr-CH');
-        document.getElementById('dateEmission').textContent = dataFormatada;
-        
-        // Gerar número da ficha automaticamente
-        const ano = hoje.getFullYear();
-        const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-        const dia = String(hoje.getDate()).padStart(2, '0');
-        const numeroFicha = `${ano}-${mes}${dia}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
-        document.getElementById('numeroFicha').textContent = numeroFicha;
-        
-        // Inicializar funcionalidade de benefícios
-        initializeBenefitsCalculator();
-    });
-
-    // Função para calcular tarifas ajustadas
-    function calculateAdjustedRates(includeVacances, include13eme) {
-        const rates = {
-            'A': 65.15,
-            'B': 52.95,
-            'C': 35.30
-        };
-        
-        let benefitsPercent = 0;
-        if (includeVacances) benefitsPercent += 0.0833; // 8.33%
-        if (include13eme) benefitsPercent += 0.0833; // 8.33%
-        
-        const adjustedRates = {};
-        for (const [category, rate] of Object.entries(rates)) {
-            adjustedRates[category] = rate / (1 + benefitsPercent);
-        }
-        
-        return {
-            original: rates,
-            adjusted: adjustedRates,
-            benefitsPercent: benefitsPercent * 100
-        };
-    }
-
-    // Função para atualizar a calculadora de benefícios
-    function updateBenefitsCalculator() {
-        const includeVacances = document.getElementById('includeVacances').checked;
-        const include13eme = document.getElementById('include13eme').checked;
-        const calculator = document.getElementById('benefitsCalculator');
-        
-        const rates = calculateAdjustedRates(includeVacances, include13eme);
-        
-        let scenarioHtml = '';
-        
-        if (includeVacances && !include13eme) {
-            scenarioHtml = `
-                <div class="scenario current">
-                    <h5>Avec Férias Seulement (Recommandé)</h5>
-                    <p><strong>Cat. A:</strong> CHF ${rates.adjusted.A.toFixed(2)}/h (au lieu de CHF ${rates.original.A})</p>
-                    <p><strong>Cat. B:</strong> CHF ${rates.adjusted.B.toFixed(2)}/h (au lieu de CHF ${rates.original.B})</p>
-                    <p><strong>Cat. C:</strong> CHF ${rates.adjusted.C.toFixed(2)}/h (au lieu de CHF ${rates.original.C})</p>
-                    <p class="success"><i class="fas fa-check-circle"></i> Reste dans le budget LPHand</p>
-                </div>
-            `;
-        } else if (includeVacances && include13eme) {
-            scenarioHtml = `
-                <div class="scenario adjusted">
-                    <h5>Avec Férias + 13ème Salaire</h5>
-                    <p><strong>Cat. A:</strong> CHF ${rates.adjusted.A.toFixed(2)}/h</p>
-                    <p><strong>Cat. B:</strong> CHF ${rates.adjusted.B.toFixed(2)}/h</p>
-                    <p><strong>Cat. C:</strong> CHF ${rates.adjusted.C.toFixed(2)}/h</p>
-                    <p class="warning"><i class="fas fa-exclamation-triangle"></i> Salaire base réduit (${rates.benefitsPercent.toFixed(2)}% de bénéfices)</p>
-                </div>
-            `;
-        } else if (!includeVacances && include13eme) {
-            scenarioHtml = `
-                <div class="scenario adjusted">
-                    <h5>Avec 13ème Salaire Seulement</h5>
-                    <p><strong>Cat. A:</strong> CHF ${rates.adjusted.A.toFixed(2)}/h</p>
-                    <p><strong>Cat. B:</strong> CHF ${rates.adjusted.B.toFixed(2)}/h</p>
-                    <p><strong>Cat. C:</strong> CHF ${rates.adjusted.C.toFixed(2)}/h</p>
-                    <p style="color: #dc3545;"><i class="fas fa-exclamation-triangle"></i> ATTENTION: Férias sont obligatoires par loi!</p>
-                </div>
-            `;
-        } else {
-            scenarioHtml = `
-                <div class="scenario current">
-                    <h5>Tarifas LPHand Standard</h5>
-                    <p><strong>Cat. A:</strong> CHF ${rates.original.A}/h</p>
-                    <p><strong>Cat. B:</strong> CHF ${rates.original.B}/h</p>
-                    <p><strong>Cat. C:</strong> CHF ${rates.original.C}/h</p>
-                    <p style="color: #dc3545;"><i class="fas fa-exclamation-triangle"></i> ATTENTION: Férias sont obligatoires par loi!</p>
-                </div>
-            `;
-        }
-        
-        calculator.innerHTML = `
-            <h4><i class="fas fa-chart-line"></i> Tarifas Ajustadas Recommandées</h4>
-            <div class="scenario-comparison">
-                ${scenarioHtml}
-            </div>
-            
-            <div class="alert alert-info">
-                <strong><i class="fas fa-lightbulb"></i> Recommandation:</strong> 
-                ${includeVacances ? 
-                    'Utilisez les tarifas ajustadas pour inclure automatiquement les bénéfices sélectionnés dans le budget LPHand disponible.' :
-                    'Les férias sont obligatoires selon l\'art. 329a CO. Cochez la case pour calculer la tarifa ajustada.'
-                }
-            </div>
-        `;
-    }
-
-    // Função para inicializar a calculadora de benefícios
-    function initializeBenefitsCalculator() {
-        const vacancesCheckbox = document.getElementById('includeVacances');
-        const treizeCheckbox = document.getElementById('include13eme');
-        
-        if (vacancesCheckbox && treizeCheckbox) {
-            vacancesCheckbox.addEventListener('change', updateBenefitsCalculator);
-            treizeCheckbox.addEventListener('change', updateBenefitsCalculator);
-            
-            // Atualizar na inicialização
-            updateBenefitsCalculator();
-        }
-    }
-
-    // Event Listeners
-    periodeInput.addEventListener('change', () => {
-        const periodeValue = periodeInput.value;
-        const disabled = !periodeValue;
-        document.querySelectorAll('.btn-select-dates').forEach(btn => btn.disabled = disabled);
-        const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
-        if(openCalendarBtnGlobal) openCalendarBtnGlobal.disabled = disabled;
-        
-        if (periodeValue) {
-            try {
-                const [year, month] = periodeValue.split('-');
-                const datePourTitre = new Date(Date.UTC(year, month - 1, 1));
-                const mois = moisEnFrancais[datePourTitre.getUTCMonth()];
-                const annee = datePourTitre.getUTCFullYear();
-                titreMoisSpan.textContent = ` - ${mois} ${annee}`;
-                
-                // Atualizar período de pagamento
-                const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
-                const periodoPagamento = `01/${month}/${year} - ${String(lastDay).padStart(2, '0')}/${month}/${year}`;
-                document.getElementById('periodoPagamento').textContent = periodoPagamento;
-            } catch(e) {
-                titreMoisSpan.textContent = '';
-                document.getElementById('periodoPagamento').textContent = '-';
-                console.error("Erreur formatage date titre:", e);
-            }
-        } else {
-            titreMoisSpan.textContent = '';
-            document.getElementById('periodoPagamento').textContent = '-';
-        }
-        tableBody.innerHTML = '';
-        document.getElementById('resultats').innerHTML = `<h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3><p>Mois/Année modifié...</p>`;
-        ajouterLigne();
-        checkAllLimits();
-    });
-
-    const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
-    if (openCalendarBtnGlobal) {
-        openCalendarBtnGlobal.addEventListener('click', () => {
-            alert("Utilisez 'Choisir Jours' sur chaque ligne.");
-        });
-    }
-
-    // Funções Utilitárias
-    function getWeekNumber(d) {
-        const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-        date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
-        var yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-        var weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
-        return { week: weekNo, year: date.getUTCFullYear() };
-    }
-
-    function calculateHoursSingleSession(startTime, endTime) {
-        if (!timeFormatRegex.test(startTime) || !timeFormatRegex.test(endTime)) return 0;
-        try {
-            const start = startTime.split(':');
-            const end = endTime.split(':');
-            const startMinutes = parseInt(start[0], 10) * 60 + parseInt(start[1], 10);
-            const endMinutes = parseInt(end[0], 10) * 60 + parseInt(end[1], 10);
-            let diffMinutes = endMinutes - startMinutes;
-            if (diffMinutes < 0) diffMinutes += 24 * 60;
-            return diffMinutes / 60;
-        } catch (e) {
-            console.error("Erreur calcul heures:", e);
-            return 0;
-        }
-    }
-
-    function validateTimeInput(input) {
-        if (!input) return false;
-        const isValid = timeFormatRegex.test(input.value);
-        input.classList.toggle('input-error', input.value !== "" && !isValid);
-        return isValid || input.value === "";
-    }
-
-    function openRowCalendar(buttonElement) {
-        const periodeValue = periodeInput.value;
-        if (!periodeValue) {
-            alert("Veuillez d'abord sélectionner le 'Mois / Année de référence'.");
-            return;
-        }
-        const row = buttonElement.closest('tr');
-        const displayDatesSpan = row.querySelector('.display-dates');
-        const hiddenDatesListInput = row.querySelector('.selected-dates-list');
-        
-        const currentDates = hiddenDatesListInput.value ? hiddenDatesListInput.value.split(',') : [];
-        
-        if (sharedFlatpickrInstance) {
-            sharedFlatpickrInstance.destroy();
-        }
-        
-        const year = parseInt(periodeValue.split('-')[0], 10);
-        const month = parseInt(periodeValue.split('-')[1], 10);
-        const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
-        
-        sharedFlatpickrInstance = flatpickr(buttonElement, {
-            mode: "multiple",
-            dateFormat: "Y-m-d",
-            locale: "fr",
-            defaultDate: currentDates,
-            minDate: `${periodeValue}-01`,
-            maxDate: `${periodeValue}-${String(lastDay).padStart(2, '0')}`,
-            monthSelectorType: 'static',
-            clickOpens: false,
-            onClose: function(selectedDates, dateStr, instance) {
-                selectedDates.sort((a, b) => a - b);
-                const displayDays = selectedDates.map(date => date.getDate()).join(', ') || "Aucun jour";
-                const storedDates = selectedDates.map(date => instance.formatDate(date, "Y-m-d")).join(',');
-                
-                displayDatesSpan.textContent = displayDays;
-                hiddenDatesListInput.value = storedDates;
-                
-                updateRowHours(row);
-                checkAllLimits();
-            }
-        });
-        sharedFlatpickrInstance.open();
-    }
-
-    function ajouterLigne() {
-        if (!tableBody) {
-            console.error("ERREUR: tableBody n'est pas prêt.");
-            return;
-        }
-        
-        const newRow = tableBody.insertRow();
-        const isPeriodSelected = !!periodeInput.value;
-        
-        newRow.innerHTML = `
-            <td>
-                <select class="activite-select">
-                    <option value="">-- Choisir une activité --</option>
-                    <optgroup label="Activités Communes">
-                        <option value="Actes ordinaires de la vie">Actes ordinaires de la vie</option>
-                        <option value="Tenue du ménage">Tenue du ménage</option>
-                        <option value="Participation à la vie sociale et loisirs">Participation vie sociale/loisirs</option>
-                        <option value="Soins particulièrement astreignants">Soins partic. astreignants</option>
-                        <option value="Exercices dextérité/mémoire">Exercices dextérité/mémoire (A)</option>
-                        <option value="Domaine de la vie">Domaine de la vie (Cat. C)</option>
-                    </optgroup>
-                    <optgroup label="Domaines (Décision)">
-                        <option value="Logement">Logement</option>
-                        <option value="Travail et formation">Travail et formation</option>
-                        <option value="Relations sociales">Relations sociales</option>
-                        <option value="Loisirs">Loisirs</option>
-                        <option value="Santé et bien-être">Santé et bien-être</option>
-                    </optgroup>
-                    <optgroup label="Surveillance">
-                        <option value="Domaine Surveillance pendant la journe">Surveillance Jour</option>
-                        <option value="Domaine Surveillance pendant la journe/Nuit">Surveillance Jour/Nuit</option>
-                    </optgroup>
-                </select>
-            </td>
-            <td class="center">
-                <button type="button" class="btn-select-dates secondary" onclick="openRowCalendar(this)" ${isPeriodSelected ? '' : 'disabled'}>
-                    <i class="fas fa-calendar-days fa-fw"></i> Choisir
-                </button>
-                <span class="display-dates" style="display: block;">Aucun jour</span>
-                <input type="hidden" class="selected-dates-list">
-            </td>
-            <td class="center">
-                <select class="categorie-select">
-                    <option value="A">A (CHF ${tarifs['A'].toFixed(2)})</option>
-                    <option value="B">B (CHF ${tarifs['B'].toFixed(2)})</option>
-                    <option value="C">C (CHF ${tarifs['C'].toFixed(2)})</option>
-                </select>
-            </td>
-            <td class="center">
-                <input type="text" class="start-time-input" placeholder="HH:MM">
-            </td>
-            <td class="center">
-                <input type="text" class="end-time-input" placeholder="HH:MM">
-            </td>
-            <td class="right">
-                <input type="text" class="heures-calculadas" readonly>
-            </td>
-        `;
-        
-        addRowInputListeners(newRow);
-    }
-
-    function updateRowHours(row) {
-        const startTimeInput = row.querySelector('.start-time-input');
-        const endTimeInput = row.querySelector('.end-time-input');
-        const heuresCalcInput = row.querySelector('.heures-calculadas');
-        const hiddenDatesListInput = row.querySelector('.selected-dates-list');
-        
-        if (!startTimeInput || !endTimeInput || !heuresCalcInput || !hiddenDatesListInput) return;
-        
-        const isStartTimeValid = validateTimeInput(startTimeInput);
-        const isEndTimeValid = validateTimeInput(endTimeInput);
-        
-        const hoursPerSession = (isStartTimeValid && isEndTimeValid) 
-            ? calculateHoursSingleSession(startTimeInput.value, endTimeInput.value) 
-            : 0;
-        
-        const selectedDates = hiddenDatesListInput.value ? hiddenDatesListInput.value.split(',') : [];
-        const numberOfDates = selectedDates.length;
-        
-        const totalHours = hoursPerSession * numberOfDates;
-        heuresCalcInput.value = totalHours > 0 ? totalHours.toFixed(2) : '';
-    }
-
-    function handleTimeInputBlur(event) {
-        const input = event.target;
-        const currentValue = input.value.trim();
-        const row = input.closest('tr');
-        
-        if (fourDigitsRegex.test(currentValue)) {
-            const hh = currentValue.substring(0, 2);
-            const mm = currentValue.substring(2, 4);
-            
-            const hour = parseInt(hh, 10);
-            const minute = parseInt(mm, 10);
-            
-            if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60) {
-                input.value = `${hh}:${mm}`;
-            }
-        }
-        
-        validateTimeInput(input);
-        updateRowHours(row);
-        checkAllLimits();
-    }
-
-    function handleActivityChange(event) {
-        const activitySelect = event.target;
-        const selectedActivity = activitySelect.value;
-        const row = activitySelect.closest('tr');
-        const categorySelect = row.querySelector('.categorie-select');
-        
-        if (categorySelect && activityCategoryMap.hasOwnProperty(selectedActivity)) {
-            const defaultCategory = activityCategoryMap[selectedActivity];
-            if (defaultCategory) {
-                categorySelect.value = defaultCategory;
-            }
-        }
-        
-        checkAllLimits();
-    }
-
-    function addRowInputListeners(row) {
-        const startTimeInput = row.querySelector('.start-time-input');
-        const endTimeInput = row.querySelector('.end-time-input');
-        const activitySelect = row.querySelector('.activite-select');
-        const categorySelect = row.querySelector('.categorie-select');
-        
-        const updateHourHandler = (event) => {
-            const currentRow = event.target.closest('tr');
-            if (currentRow) {
-                validateTimeInput(event.target);
-                updateRowHours(currentRow);
-            }
-        };
-        
-        const blurHandler = (event) => {
-            handleTimeInputBlur(event);
-        };
-        
-        const changeHandler = () => {
-            checkAllLimits();
-        };
-        
-        if (startTimeInput) {
-            startTimeInput.addEventListener('input', updateHourHandler);
-            startTimeInput.addEventListener('blur', blurHandler);
-        }
-        
-        if (endTimeInput) {
-            endTimeInput.addEventListener('input', updateHourHandler);
-            endTimeInput.addEventListener('blur', blurHandler);
-        }
-        
-        if (activitySelect) {
-            activitySelect.addEventListener('change', handleActivityChange);
-        }
-        
-        if (categorySelect) {
-            categorySelect.addEventListener('change', changeHandler);
-        }
-    }
-
-    function remplirEmploye() {
-        const select = document.getElementById('employe');
-        const selectedValue = select.value;
-        const adresseInput = document.getElementById('adresseEmploye');
-        const avsInput = document.getElementById('numeroAVS');
-        const dateNaissanceInput = document.getElementById('dateNaissance');
-        const etatCivilInput = document.getElementById('etatCivil');
-        const nombreEnfantsInput = document.getElementById('nombreEnfants');
-        const cantonInput = document.getElementById('canton');
-        const communeInput = document.getElementById('commune');
-        const nationaliteInput = document.getElementById('nationalite');
-        const signatureEmployeNom = document.getElementById('signatureEmployeNom');
-        
-        if (selectedValue) {
-            const infos = selectedValue.split('|');
-            adresseInput.value = infos[1] ? infos[1].trim() : '';
-            avsInput.value = infos[2] ? infos[2].trim() : '';
-            dateNaissanceInput.value = infos[3] ? infos[3].trim() : '';
-            etatCivilInput.value = infos[4] ? infos[4].trim() : '';
-            nombreEnfantsInput.value = infos[5] ? infos[5].trim() : '';
-            cantonInput.value = infos[6] ? infos[6].trim() : '';
-            communeInput.value = infos[7] ? infos[7].trim() : '';
-            nationaliteInput.value = infos[8] ? infos[8].trim() : '';
-            
-            // Atualizar nome na assinatura
-            const nomeEmploye = select.options[select.selectedIndex].text;
-            signatureEmployeNom.textContent = nomeEmploye;
-        } else {
-            adresseInput.value = '';
-            avsInput.value = '';
-            dateNaissanceInput.value = '';
-            etatCivilInput.value = '';
-            nombreEnfantsInput.value = '';
-            cantonInput.value = '';
-            communeInput.value = '';
-            nationaliteInput.value = '';
-            signatureEmployeNom.textContent = '-';
-        }
-        
-        periodeInput.value = '';
-        titreMoisSpan.textContent = '';
-        document.getElementById('periodoPagamento').textContent = '-';
-        if (tableBody) tableBody.innerHTML = '';
-        
-        ajouterLigne();
-        
-        document.querySelectorAll('.btn-select-dates').forEach(btn => {
-            btn.disabled = true;
-        });
-        
-        const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
-        if(openCalendarBtnGlobal) {
-            openCalendarBtnGlobal.disabled = true;
-        }
-        
-        document.getElementById('resultats').innerHTML = `<h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3><p>Veuillez sélectionner le mois...</p>`;
-        
-        alertArea.innerHTML = '';
-        
-        checkAllLimits();
-    }
-
-    function checkAllLimits() {
-        const selectedEmployeeOption = employeeSelect.options[employeeSelect.selectedIndex];
-        const currentEmployeeName = selectedEmployeeOption.value ? selectedEmployeeOption.text : null;
-        const periodeValue = periodeInput.value;
-        
-        alertArea.innerHTML = '';
-        
-        if (!currentEmployeeName || !periodeValue) {
-            return;
-        }
-        
-        const monthlyTotals = {
-            total: 0,
-            A: 0,
-            B: 0,
-            C: 0
-        };
-        
-        const weeklyTotals = {};
-        const weeklyCategoryTotals = {
-            'A': {},
-            'B': {},
-            'C': {}
-        };
-        
-        if (!tableBody) return;
-
-        tableBody.querySelectorAll('tr').forEach(row => {
-            const heuresCalcInput = row.querySelector('.heures-calculadas');
-            const categorieSelect = row.querySelector('.categorie-select');
-            const hiddenDatesListInput = row.querySelector('.selected-dates-list');
-            const startTimeInput = row.querySelector('.start-time-input');
-            const endTimeInput = row.querySelector('.end-time-input');
-            
-            if (heuresCalcInput && categorieSelect && hiddenDatesListInput && 
-                startTimeInput && endTimeInput && 
-                !startTimeInput.classList.contains('input-error') && 
-                !endTimeInput.classList.contains('input-error')) {
-                
-                const heuresLigne = parseFloat(heuresCalcInput.value) || 0;
-                const categorie = categorieSelect.value;
-                const selectedDatesStr = hiddenDatesListInput.value;
-                const hoursPerSession = calculateHoursSingleSession(startTimeInput.value, endTimeInput.value);
-                
-                if (heuresLigne > 0 && selectedDatesStr && hoursPerSession > 0) {
-                    monthlyTotals.total += heuresLigne;
-                    
-                    if (monthlyTotals.hasOwnProperty(categorie)) {
-                        monthlyTotals[categorie] += heuresLigne;
-                    }
-                    
-                    const dates = selectedDatesStr.split(',');
-                    dates.forEach(dateStr => {
-                        if (dateStr) {
-                            try {
-                                const dateParts = dateStr.split('-');
-                                const dateObj = new Date(Date.UTC(parseInt(dateParts[0]), parseInt(dateParts[1]) - 1, parseInt(dateParts[2])));
-                                
-                                if (isNaN(dateObj.getTime())) throw new Error("Date invalide");
-                                
-                                const weekInfo = getWeekNumber(dateObj);
-                                const weekKey = `${weekInfo.year}-W${String(weekInfo.week).padStart(2, '0')}`;
-                                
-                                if (!weeklyTotals[weekKey]) weeklyTotals[weekKey] = 0;
-                                weeklyTotals[weekKey] += hoursPerSession;
-                                
-                                if (!weeklyCategoryTotals[categorie][weekKey]) weeklyCategoryTotals[categorie][weekKey] = 0;
-                                weeklyCategoryTotals[categorie][weekKey] += hoursPerSession;
-                                
-                            } catch (e) {
-                                console.error("Err date weekly limit parse:", dateStr, e);
-                            }
-                        }
-                    });
-                }
-            }
-        });
-        
-        let alertHTML = '<ul>';
-        let hasAlerts = false;
-        
-        Object.keys(weeklyTotals).sort().forEach(weekKey => {
-            const hours = weeklyTotals[weekKey];
-            const weekNum = weekKey.split('W')[1];
-            
-            if (hours > LIMITE_HEBDO_INDIV) {
-                hasAlerts = true;
-                alertHTML += `<li><div class="alert alert-danger">DÉPASSÉ: Semaine ${weekNum}: ${hours.toFixed(2)}h / ${LIMITE_HEBDO_INDIV}h max!</div></li>`;
-            } else if (hours > LIMITE_HEBDO_AVERTISSEMENT) {
-                hasAlerts = true;
-                alertHTML += `<li><div class="alert alert-warning">ATTENTION: Semaine ${weekNum}: ${hours.toFixed(2)}h / ${LIMITE_HEBDO_INDIV}h max.</div></li>`;
-            }
-        });
-        
-        ['A', 'B', 'C'].forEach(cat => {
-            Object.keys(weeklyCategoryTotals[cat]).sort().forEach(weekKey => {
-                const hours = weeklyCategoryTotals[cat][weekKey];
-                const weekNum = weekKey.split('W')[1];
-                const catLimit = LIMITES_HEBDO_CATEGORIE[cat];
-                
-                if (hours > catLimit) {
-                    hasAlerts = true;
-                    alertHTML += `<li><div class="alert alert-warning">FINANCEMENT: Catégorie ${cat}, Semaine ${weekNum}: ${hours.toFixed(2)}h dépasse la limite de ${catLimit}h</div></li>`;
-                }
-            });
-        });
-        
-        if (monthlyTotals.total > LIMITE_MENSUEL_GLOBAL) {
-            hasAlerts = true;
-            alertHTML += `<li><div class="alert alert-danger">DÉPASSÉ: Total mensuel: ${monthlyTotals.total.toFixed(2)}h dépasse la limite globale de ${LIMITE_MENSUEL_GLOBAL}h!</div></li>`;
-        } else if (monthlyTotals.total > 0) {
-            hasAlerts = true;
-            alertHTML += `<li><div class="alert alert-info">Total mensuel: ${monthlyTotals.total.toFixed(2)}h / ${LIMITE_MENSUEL_GLOBAL}h max.</div></li>`;
-        }
-        
-        if (monthlyTotals.total > 0) {
-            hasAlerts = true;
-            alertHTML += '<li><div class="alert alert-info" style="margin-top: 5px;"><strong>Totaux / Catégorie (vs Limites Financement Mensuel):</strong><ul>';
-            
-            let catDetail = '';
-            ['A', 'B', 'C'].forEach(cat => {
-                const limiteCat = LIMITES_MENSUELLES_CATEGORIE[cat];
-                const totalCat = monthlyTotals[cat];
-                const status = totalCat > limiteCat ? ' <strong style="color:#dc3545;">(DÉPASSÉ)</strong>' : '';
-                
-                catDetail += `<li style="font-size:0.9em;">Cat ${cat}: ${totalCat.toFixed(2)}h / ${limiteCat}h${status}</li>`;
-            });
-            
-            alertHTML += catDetail + '</ul></div></li>';
-        }
-        
-        if (hasAlerts) {
-            alertHTML += '</ul>';
-            alertArea.innerHTML = alertHTML;
-        } else if(currentEmployeeName && periodeValue) {
-            alertArea.innerHTML = `<div class="alert alert-info">Aucun avertissement de limite pour le moment.</div>`;
-        }
-    }
-
-    function calculerSalaire() {
-        let salaireBrut = 0;
-        let totalHeuresCalculeesGlobal = 0;
-        let totalHeuresExtras = 0;
-        const resultatsDiv = document.getElementById('resultats');
-        
-        // Obter valores das horas extras
-        const heuresExtras = parseFloat(document.getElementById('heuresExtras').value) || 0;
-        const tauxHeuresExtras = parseFloat(document.getElementById('tauxHeuresExtras').value) || 125;
-        const bonus = parseFloat(document.getElementById('bonus').value) || 0;
-        
-        let calculDetailsHtml = `
-            <h3><i class="fas fa-list-ul fa-fw"></i> Détail des Prestations</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Activité</th>
-                        <th class="center">Jours Travaillés</th>
-                        <th class="center">Cat.</th>
-                        <th class="center">Début</th>
-                        <th class="center">Fin</th>
-                        <th class="right">Heures (Total Ligne)</th>
-                        <th class="right">Tarif/h</th>
-                        <th class="right">Total Ligne (CHF)</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        
-        let hasValidEntries = false;
-        let hasInvalidTimes = false;
-        
-        if (!tableBody) return;
-
-        document.querySelectorAll('#tableTravaux tbody tr').forEach(row => {
-            updateRowHours(row);
-            
-            const activiteSelect = row.querySelector('.activite-select');
-            const displayDatesSpan = row.querySelector('.display-dates');
-            const categorieSelect = row.querySelector('.categorie-select');
-            const startTimeInput = row.querySelector('.start-time-input');
-            const endTimeInput = row.querySelector('.end-time-input');
-            const heuresCalcInput = row.querySelector('.heures-calculadas');
-            
-            if (!activiteSelect || !displayDatesSpan || !categorieSelect || 
-                !startTimeInput || !endTimeInput || !heuresCalcInput) return;
-            
-            if (startTimeInput.classList.contains('input-error') || 
-                endTimeInput.classList.contains('input-error')) {
-                hasInvalidTimes = true;
-            }
-            
-            const activite = activiteSelect.value;
-            const joursDisplay = displayDatesSpan.textContent === 'Aucun jour' ? '-' : displayDatesSpan.textContent;
-            const categorie = categorieSelect.value;
-            const startTime = startTimeInput.value;
-            const endTime = endTimeInput.value;
-            const heuresLigne = parseFloat(heuresCalcInput.value) || 0;
-            
-            if (activite && heuresLigne > 0 && tarifs[categorie] && 
-                !startTimeInput.classList.contains('input-error') && 
-                !endTimeInput.classList.contains('input-error')) {
-                
-                hasValidEntries = true;
-                const tarifHoraire = tarifs[categorie];
-                const totalLigne = heuresLigne * tarifHoraire;
-                
-                salaireBrut += totalLigne;
-                totalHeuresCalculeesGlobal += heuresLigne;
-                
-                calculDetailsHtml += `
-                    <tr>
-                        <td>${activite}</td>
-                        <td class="center">${joursDisplay}</td>
-                        <td class="center">${categorie}</td>
-                        <td class="center">${startTime || '-'}</td>
-                        <td class="center">${endTime || '-'}</td>
-                        <td class="right">${heuresLigne.toFixed(2)}</td>
-                        <td class="right">${tarifHoraire.toFixed(2)}</td>
-                        <td class="right">${totalLigne.toFixed(2)}</td>
-                    </tr>
-                `;
-            }
-        });
-        
-        calculDetailsHtml += `</tbody></table>`;
-        
-        if (hasInvalidTimes) {
-            resultatsDiv.innerHTML = `
-                <h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3>
-                <p style="color: red;">Veuillez corriger les heures invalides (marquées en rouge).</p>
-                ${calculDetailsHtml}
-            `;
-            return;
-        }
-        
-        if (!hasValidEntries && heuresExtras === 0 && bonus === 0) {
-            resultatsDiv.innerHTML = `
-                <h3><i class="fas fa-poll fa-fw"></i> Résultats du Calcul</h3>
-                <p style="color: red;">Veuillez renseigner au moins une ligne valide ou des heures extras/bonus.</p>
-            `;
-            return;
-        }
-        
-        // Calcular horas extras
-        let salaireHeuresExtras = 0;
-        if (heuresExtras > 0) {
-            // Usar tarifa média ou tarifa B como base para horas extras
-            const tarifMoyenHeuresExtras = tarifs['B']; // Ou calcular média das tarifas usadas
-            salaireHeuresExtras = heuresExtras * tarifMoyenHeuresExtras * (tauxHeuresExtras / 100);
-            totalHeuresExtras = heuresExtras;
-        }
-        
-        // Total bruto incluindo horas extras e bonus
-        const salaireBrutTotal = salaireBrut + salaireHeuresExtras + bonus;
-        
-        const avsRate = 0.053; // 5.3%
-        const acRate = 0.011;  // 1.1%
-        const lppRate = 0.075; // 7.5%
-        const accidentRate = 0.01; // 1%
-        
-        const avsDeduction = salaireBrutTotal * avsRate;
-        const acDeduction = salaireBrutTotal * acRate;
-        const lppDeduction = salaireBrutTotal * lppRate;
-        const accidentDeduction = salaireBrutTotal * accidentRate;
-        
-        const totalDeductions = avsDeduction + acDeduction + lppDeduction + accidentDeduction;
-        const salaireNet = salaireBrutTotal - totalDeductions;
-        
-        // Verificar se benefícios estão habilitados
-        const includeVacances = document.getElementById('includeVacances')?.checked || false;
-        const include13eme = document.getElementById('include13eme')?.checked || false;
-        
-        // Calcular valores dos benefícios
-        let vacancesValue = 0;
-        let treizeValue = 0;
-        let salaireBrutAjuste = salaireBrutTotal;
-        
-        if (includeVacances || include13eme) {
-            let benefitsPercent = 0;
-            if (includeVacances) benefitsPercent += 0.0833; // 8.33%
-            if (include13eme) benefitsPercent += 0.0833; // 8.33%
-            
-            // Calcular salário base ajustado
-            salaireBrutAjuste = salaireBrutTotal / (1 + benefitsPercent);
-            
-            if (includeVacances) {
-                vacancesValue = salaireBrutAjuste * 0.0833;
-            }
-            if (include13eme) {
-                treizeValue = salaireBrutAjuste * 0.0833;
-            }
-        }
-        
-        resultatsDiv.innerHTML = `
-            ${calculDetailsHtml}
-            <p class="lpp-comment" style="font-size:0.8em; color: #6c757d; text-align: right;">
-                <i>* LPP et Assurance Accidents basés sur des taux fixes simplifiés.</i>
-            </p>
-            <h3><i class="fas fa-file-invoice-dollar fa-fw"></i> Résumé du Salaire du Mois</h3>
-            <table>
-                <tbody>
-                    <tr>
-                        <td class="total-label"><i class="fas fa-clock fa-fw"></i> Total Heures Travaillées (Activités)</td>
-                        <td class="total-value">${totalHeuresCalculeesGlobal.toFixed(2)} h</td>
-                    </tr>
-                    ${totalHeuresExtras > 0 ? `
-                    <tr>
-                        <td class="total-label"><i class="fas fa-clock fa-fw"></i> Heures Extras (${tauxHeuresExtras}%)</td>
-                        <td class="total-value">${totalHeuresExtras.toFixed(2)} h</td>
-                    </tr>` : ''}
-                    <tr>
-                        <td class="total-label"><i class="fas fa-coins fa-fw"></i> Salaire ${(includeVacances || include13eme) ? 'Base' : 'Brut'} (Activités)</td>
-                        <td class="total-value">CHF ${(includeVacances || include13eme) ? salaireBrutAjuste.toFixed(2) : salaireBrut.toFixed(2)}</td>
-                    </tr>
-                    ${salaireHeuresExtras > 0 ? `
-                    <tr>
-                        <td class="total-label"><i class="fas fa-plus fa-fw"></i> Heures Extras</td>
-                        <td class="total-value">CHF ${salaireHeuresExtras.toFixed(2)}</td>
-                    </tr>` : ''}
-                    ${bonus > 0 ? `
-                    <tr>
-                        <td class="total-label"><i class="fas fa-award fa-fw"></i> Bonus/Primes</td>
-                        <td class="total-value">CHF ${bonus.toFixed(2)}</td>
-                    </tr>` : ''}
-                    ${includeVacances ? `
-                    <tr class="benefits-header">
-                        <td class="total-label"><i class="fas fa-umbrella-beach fa-fw"></i> Indemnité de vacances (8,33%)</td>
-                        <td class="total-value">CHF ${vacancesValue.toFixed(2)}</td>
-                    </tr>` : ''}
-                    ${include13eme ? `
-                    <tr class="benefits-header">
-                        <td class="total-label"><i class="fas fa-gift fa-fw"></i> 13ème salaire (8,33%)</td>
-                        <td class="total-value">CHF ${treizeValue.toFixed(2)}</td>
-                    </tr>` : ''}
-                    <tr>
-                        <td class="total-label"><i class="fas fa-calculator fa-fw"></i> <strong>Salaire Brut Total</strong></td>
-                        <td class="total-value"><strong>CHF ${salaireBrutTotal.toFixed(2)}</strong></td>
-                    </tr>
-                    <tr class="deductions-header">
-                        <td colspan="2" style="background-color: #e9ecef; font-weight: bold; padding-top: 15px;">
-                            <i class="fas fa-circle-minus fa-fw"></i> Déductions Sociales
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>AVS/AI/APG <span class="deduction-percentage">(${(avsRate*100).toFixed(1)}%)</span></td>
-                        <td class="total-value">CHF ${avsDeduction.toFixed(2)}</td>
-                    </tr>
-                    <tr>
-                        <td>AC (Assurance-chômage) <span class="deduction-percentage">(${(acRate*100).toFixed(1)}%)</span></td>
-                        <td class="total-value">CHF ${acDeduction.toFixed(2)}</td>
-                    </tr>
-                    <tr>
-                        <td>LPP (Prévoyance prof.)* <span class="deduction-percentage">(${(lppRate*100).toFixed(1)}%)</span></td>
-                        <td class="total-value">CHF ${lppDeduction.toFixed(2)}</td>
-                    </tr>
-                    <tr>
-                        <td>Assurance Accidents (non prof.)* <span class="deduction-percentage">(${(accidentRate*100).toFixed(1)}%)</span></td>
-                        <td class="total-value">CHF ${accidentDeduction.toFixed(2)}</td>
-                    </tr>
-                    <tr>
-                        <td class="total-label"><i class="fas fa-calculator fa-fw"></i> Total des Déductions</td>
-                        <td class="total-value">CHF ${totalDeductions.toFixed(2)}</td>
-                    </tr>
-                    <tr class="net-salary">
-                        <td class="total-label"><i class="fas fa-hand-holding-usd fa-fw"></i> Salaire Net</td>
-                        <td class="total-value">CHF ${salaireNet.toFixed(2)}</td>
-                    </tr>
-                </tbody>
-            </table>
-        `;
-        
-        checkAllLimits();
-    }
-
-    // Inicialização quando o DOM estiver pronto
-    document.addEventListener('DOMContentLoaded', () => {
-        tableBody = document.getElementById('tableTravaux').getElementsByTagName('tbody')[0];
-        
-        flatpickr("#periode", {
-            plugins: [
-                new monthSelectPlugin({
-                    shorthand: true, 
-                    dateFormat: "Y-m",
-                    altFormat: "F Y",
-                })
-            ],
-            locale: "fr",
-            onChange: function(selectedDates, dateStr, instance) {
-                const event = new Event('change', { bubbles: true });
-                periodeInput.dispatchEvent(event);
-            }
-        });
-
-        if (tableBody) {
-            ajouterLigne();
-            
-            document.querySelectorAll('.btn-select-dates').forEach(btn => {
-                btn.disabled = true;
-            });
-            
-            const openCalendarBtnGlobal = document.getElementById('openCalendarBtnGlobal');
-            if(openCalendarBtnGlobal) {
-                openCalendarBtnGlobal.disabled = true;
-            }
-        } else {
-            console.error("Erro: Não foi possível encontrar o tbody da tabela.");
-        }
-    });
-
-    // Funções de impressão específicas
-    function imprimerPourEmployeur() {
-        // Mostra os alertas para o empregador
-        const alertArea = document.getElementById('alert-area');
-        if (alertArea) {
-            alertArea.style.display = 'block';
-        }
-        window.print();
-    }
-
-    function imprimerPourEmploye() {
-        // Oculta os alertas para o empregado
-        const alertArea = document.getElementById('alert-area');
-        if (alertArea) {
-            alertArea.style.display = 'none';
-        }
-        window.print();
-        // Restaura a exibição dos alertas após a impressão
-        setTimeout(() => {
-            if (alertArea) {
-                alertArea.style.display = 'block';
-            }
-        }, 1000);
-    }
-</script>
+<script src="js/rates.js"></script>
+<script src="js/employees.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/calculations.js"></script>
+<script src="js/events.js"></script>
 </body>
 </html>
 
