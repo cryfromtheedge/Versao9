@@ -97,7 +97,8 @@ const translations = {
         "daytime-surveillance": "Surveillance Jour",
         "day-night-surveillance": "Surveillance Jour/Nuit",
         "choose": "Choisir",
-        "no-day": "Aucun jour"
+        "no-day": "Aucun jour",
+        "send-email": "Envoyer par e-mail"
     }
 };
 

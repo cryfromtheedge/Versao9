@@ -113,3 +113,14 @@ function printForEmployee() {
         }
     }, 1000);
 }
+
+/**
+ * Sends the payslip by email.
+ */
+function sendEmail() {
+    const employeeName = employeeSelect.options[employeeSelect.selectedIndex].text;
+    const subject = `Fiche de salaire - ${employeeName}`;
+    const body = `Bonjour, veuillez trouver ci-joint votre fiche de salaire.`;
+    const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+    window.location.href = mailtoLink;
+}

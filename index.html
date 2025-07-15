@@ -165,7 +165,7 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div id="app" class="container">
     <div class="header">
         <div class="header-title">
             <h1 data-i18n="payslip-title">Fiche de Salaire Mensuelle</h1><span id="mois-annee-titre"></span>
@@ -244,52 +244,53 @@
         <div class="form-row">
             <div class="form-col">
                 <label for="employe"><i class="fas fa-user-check fa-fw"></i> <span data-i18n="select-employee">Sélectionner Employé(e):</span></label>
-                <select id="employe" onchange="fillEmployeeInformation()">
+                <select v-model="selectedEmployee">
                     <option value="">-- Choisir un(e) employé(e) --</option>
+                    <option v-for="employee in employees" :value="employee">{{ employee.name }}</option>
                 </select>
             </div>
             <div class="form-col">
                 <label for="adresseEmploye"><i class="fas fa-home fa-fw"></i> <span data-i18n="employee-address">Adresse Employé(e):</span></label>
-                <textarea id="adresseEmploye" rows="3" readonly></textarea>
+                <textarea :value="selectedEmployee.address" rows="3" readonly></textarea>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-col-small">
                 <label for="numeroAVS"><i class="fas fa-hashtag fa-fw"></i> <span data-i18n="avs-number">Numéro AVS:</span></label>
-                <input type="text" id="numeroAVS" readonly>
+                <input type="text" :value="selectedEmployee.avs" readonly>
             </div>
             <div class="form-col-small">
                 <label for="dateNaissance"><i class="fas fa-birthday-cake fa-fw"></i> <span data-i18n="birth-date">Date de Naissance:</span></label>
-                <input type="date" id="dateNaissance" readonly>
+                <input type="date" :value="selectedEmployee.birthDate" readonly>
             </div>
             <div class="form-col-small">
                 <label for="etatCivil"><i class="fas fa-heart fa-fw"></i> <span data-i18n="civil-status">État Civil:</span></label>
-                <input type="text" id="etatCivil" readonly>
+                <input type="text" :value="selectedEmployee.civilState" readonly>
             </div>
             <div class="form-col-small">
                 <label for="nombreEnfants"><i class="fas fa-child fa-fw"></i> <span data-i18n="children">Enfants:</span></label>
-                <input type="number" id="nombreEnfants" readonly>
+                <input type="number" :value="selectedEmployee.children" readonly>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-col-small">
                 <label for="canton"><i class="fas fa-map fa-fw"></i> <span data-i18n="canton">Canton:</span></label>
-                <input type="text" id="canton" readonly>
+                <input type="text" :value="selectedEmployee.canton" readonly>
             </div>
             <div class="form-col-small">
                 <label for="commune"><i class="fas fa-map-pin fa-fw"></i> <span data-i18n="commune">Commune:</span></label>
-                <input type="text" id="commune" readonly>
+                <input type="text" :value="selectedEmployee.commune" readonly>
             </div>
             <div class="form-col-small">
                 <label for="nationalite"><i class="fas fa-flag fa-fw"></i> <span data-i18n="nationality">Nationalité:</span></label>
-                <input type="text" id="nationalite" readonly>
+                <input type="text" :value="selectedEmployee.nationality" readonly>
             </div>
             <div class="form-col period-selector-col">
                 <label for="periode"><i class="fas fa-calendar-alt fa-fw"></i> <span data-i18n="reference-month-year">Mois / Année de référence:</span></label>
                 <div class="period-selector-inputs">
-                    <div><input type="text" id="periode" data-i18n="select-month" placeholder="Sélectionner le mois..."></div>
+                    <div><input type="text" v-model="period" data-i18n="select-month" placeholder="Sélectionner le mois..."></div>
                     <div>
                         <button type="button" id="openCalendarBtnGlobal" class="secondary" disabled data-i18n="choose-days-for-lines" title="Choisir les jours pour les lignes ci-dessous">
                             <i class="fas fa-calendar-plus"></i>
@@ -306,15 +307,15 @@
         <div class="form-row">
             <div class="form-col-small">
                 <label for="heuresExtras"><i class="fas fa-clock fa-fw"></i> <span data-i18n="overtime-hours">Heures Extras:</span></label>
-                <input type="number" id="heuresExtras" step="0.01" placeholder="0.00">
+                <input type="number" v-model="overtimeHours" step="0.01" placeholder="0.00">
             </div>
             <div class="form-col-small">
                 <label for="tauxHeuresExtras"><i class="fas fa-percentage fa-fw"></i> <span data-i18n="increased-rate-percentage">Taux Majoré (%):</span></label>
-                <input type="number" id="tauxHeuresExtras" step="0.1" placeholder="125" value="125">
+                <input type="number" v-model="overtimeRate" step="0.1" placeholder="125" value="125">
             </div>
             <div class="form-col">
                 <label for="bonus"><i class="fas fa-award fa-fw"></i> <span data-i18n="bonus-primes-chf">Bonus/Primes (CHF):</span></label>
-                <input type="number" id="bonus" step="0.01" placeholder="0.00">
+                <input type="number" v-model="bonus" step="0.01" placeholder="0.00">
             </div>
         </div>
     </div>
@@ -355,6 +356,9 @@
         <button type="button" onclick="printForEmployee()">
             <i class="fas fa-file-pdf"></i> <span data-i18n="print-for-employee">Imprimer (Employé)</span>
         </button>
+        <button type="button" onclick="sendEmail()">
+            <i class="fas fa-envelope"></i> <span data-i18n="send-email">Envoyer par e-mail</span>
+        </button>
     </div>
 
     <div id="resultats" class="section">
@@ -376,6 +380,12 @@
 <script src="js/ui.js"></script>
 <script src="js/calculations.js"></script>
 <script src="js/events.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.0.css">
+<script src="https://code.jquery.com/qunit/qunit-2.20.0.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="js/tests.js"></script>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
 </body>
 </html>
 
